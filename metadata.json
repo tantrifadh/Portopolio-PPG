@@ -1,0 +1,6 @@
+{
+  "name": "Portofolio Pendidik - Tantri Fadhillah, S.Pd.",
+  "description": "Portofolio digital akademik dan pendidik profesional: profil, artefak pembelajaran, instrumen penilaian, dokumentasi, blog refleksi, dan kumpulan tugas seminar kependidikan dengan PDF viewer zoom.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
