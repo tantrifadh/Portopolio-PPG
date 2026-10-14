@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { 
-  ClipboardCheck, 
   Calculator, 
-  HelpCircle, 
   Check, 
   Download, 
-  Layers, 
-  Sparkles,
-  Award,
-  AlertCircle
+  Award
 } from 'lucide-react';
 import { ASSESSMENT_RUBRICS } from '../data/portfolioData';
 
@@ -45,10 +40,10 @@ export const PenilaianSection: React.FC = () => {
   const finalScore = calculateTotal();
 
   const getPredicate = (score: number) => {
-    if (score >= 88) return { label: 'Sangat Baik (A)', color: 'bg-emerald-100 text-emerald-950 border-emerald-300', note: 'Kompetensi telah tercapai dengan optimal dan melampaui kriteria ketuntasan.' };
-    if (score >= 75) return { label: 'Baik (B)', color: 'bg-sky-100 text-sky-950 border-sky-300', note: 'Kompetensi telah tercapai sesuai kriteria ketuntasan tujuan pembelajaran.' };
-    if (score >= 60) return { label: 'Cukup (C)', color: 'bg-amber-100 text-amber-950 border-amber-300', note: 'Sebagian kompetensi tercapai; membutuhkan penguatan konsep terbimbing.' };
-    return { label: 'Perlu Bimbingan (D)', color: 'bg-rose-100 text-rose-950 border-rose-300', note: 'Belum mencapai ketuntasan minimum; memerlukan intervensi remedial intensif.' };
+    if (score >= 88) return { label: 'Sangat Baik (A)', note: 'Kompetensi tercapai optimal dan melampaui kriteria ketuntasan.' };
+    if (score >= 75) return { label: 'Baik (B)', note: 'Kompetensi tercapai sesuai kriteria ketuntasan tujuan pembelajaran.' };
+    if (score >= 60) return { label: 'Cukup (C)', note: 'Sebagian kompetensi tercapai; butuh penguatan konsep terarah.' };
+    return { label: 'Perlu Bimbingan (D)', note: 'Belum mencapai ketuntasan minimum; memerlukan intervensi remedial.' };
   };
 
   const predicate = getPredicate(finalScore);
@@ -84,21 +79,20 @@ export const PenilaianSection: React.FC = () => {
     <div className="space-y-12">
       
       {/* Header */}
-      <div className="border-b border-amber-200 pb-6">
-        <span className="text-xs font-bold text-sky-800 bg-sky-100/90 border border-sky-300 px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
-          <Sparkles className="w-3.5 h-3.5 text-sky-600" />
-          Evaluasi Autentik & Rubrik Berkeadilan
+      <div className="border-b border-stone-200 pb-6">
+        <span className="text-xs font-medium text-stone-500 uppercase tracking-wider block">
+          Evaluasi Autentik & Rubrik Penilaian
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 mt-2">
           Instrumen & Rubrik Penilaian
         </h1>
-        <p className="text-sm sm:text-base text-stone-700 mt-2 max-w-3xl leading-relaxed">
-          Menjamin keadilan dan objektivitas evaluasi belajar melalui instrumen asesmen diagnostik, formatif, dan sumatif berstandar Kurikulum Merdeka yang dilengkapi simulator penskoran interaktif.
+        <p className="text-sm sm:text-base text-stone-600 mt-2 max-w-3xl leading-relaxed">
+          Menjamin keadilan evaluasi pembelajaran melalui rubrik analitik terstandarisasi untuk asesmen formatif dan sumatif, dilengkapi simulator penskoran interaktif.
         </p>
       </div>
 
-      {/* Switcher tabs between rubrics */}
-      <div className="flex flex-wrap items-center gap-3">
+      {/* Switcher segmented control */}
+      <div className="flex flex-wrap items-center gap-2">
         {ASSESSMENT_RUBRICS.map((rubric, idx) => (
           <button
             key={rubric.id}
@@ -110,37 +104,37 @@ export const PenilaianSection: React.FC = () => {
               });
               setSimulatedScores(initial);
             }}
-            className={`px-4 py-2.5 text-xs font-bold rounded-2xl border-2 transition-all cursor-pointer ${
+            className={`px-3.5 py-2 text-xs font-medium rounded-lg border transition-colors cursor-pointer ${
               selectedRubricIndex === idx
-                ? 'bg-gradient-to-r from-amber-500 to-orange-500 border-amber-500 text-white shadow-sm scale-102'
-                : 'bg-white border-stone-200 text-stone-700 hover:border-amber-300 hover:bg-amber-50'
+                ? 'bg-stone-900 border-stone-900 text-white'
+                : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
             }`}
           >
-            <span className="font-bold underline">{rubric.type}:</span> {rubric.title.slice(0, 36)}...
+            <span>{rubric.type}: {rubric.title.slice(0, 32)}...</span>
           </button>
         ))}
       </div>
 
-      {/* Main Rubric & Interactive Simulator Split */}
+      {/* Main Rubric & Simulator Split */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left: Detailed Criteria Table */}
-        <div className="lg:col-span-8 bg-white border-2 border-stone-200/90 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-amber-100 pb-4">
+        {/* Left: Detailed Criteria */}
+        <div className="lg:col-span-8 bg-white border border-stone-200 rounded-xl p-6 sm:p-8 space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stone-100 pb-4">
             <div>
-              <span className="text-xs font-mono font-bold text-amber-950 bg-amber-100 border border-amber-300 px-3 py-0.5 rounded-full">
-                Tipe: Asesmen {activeRubric.type}
+              <span className="text-xs font-mono text-stone-500">
+                Tipe Asesmen: {activeRubric.type}
               </span>
-              <h2 className="text-xl font-bold font-serif-title text-stone-900 mt-2">
+              <h2 className="text-xl font-bold font-serif-title text-stone-900 mt-1">
                 {activeRubric.title}
               </h2>
             </div>
 
             <button
               onClick={handleDownloadRubric}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-stone-700 bg-amber-50 hover:bg-amber-100 rounded-xl transition-colors border border-amber-200 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-stone-700 bg-stone-100 hover:bg-stone-200 rounded border border-stone-200 cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5 text-amber-700" />
+              <Download className="w-3.5 h-3.5 text-stone-600" />
               <span>Unduh Rubrik</span>
             </button>
           </div>
@@ -154,37 +148,37 @@ export const PenilaianSection: React.FC = () => {
             {activeRubric.criteria.map((criteria, cIdx) => (
               <div 
                 key={cIdx}
-                className="bg-amber-50/40 border-2 border-amber-200 rounded-2xl p-5 space-y-3"
+                className="bg-stone-50 border border-stone-200 rounded-xl p-5 space-y-3"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-bold text-stone-900 text-sm font-serif-title">
+                  <h3 className="font-semibold text-stone-900 text-sm">
                     {cIdx + 1}. {criteria.name}
                   </h3>
-                  <span className="text-xs font-mono font-bold text-orange-900 bg-orange-100 border border-orange-300 px-2.5 py-0.5 rounded-full">
+                  <span className="text-xs font-mono text-stone-500">
                     Bobot: {criteria.weight}%
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                   {criteria.levels.map((lvl) => {
                     const isSelected = simulatedScores[criteria.name] === lvl.score;
                     return (
                       <button
                         key={lvl.score}
                         onClick={() => handleScoreChange(criteria.name, lvl.score)}
-                        className={`text-left p-3.5 rounded-xl border-2 text-xs transition-all cursor-pointer ${
+                        className={`text-left p-3 rounded-lg border text-xs transition-colors cursor-pointer ${
                           isSelected
-                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white border-amber-600 shadow-sm scale-101'
-                            : 'bg-white border-stone-200 text-stone-700 hover:border-amber-300 hover:bg-amber-50'
+                            ? 'bg-stone-900 text-white border-stone-900'
+                            : 'bg-white border-stone-200 text-stone-700 hover:border-stone-400'
                         }`}
                       >
                         <div className="flex items-center justify-between mb-1">
-                          <span className="font-bold">
-                            Skor {lvl.score} - {lvl.label}
+                          <span className="font-semibold">
+                            Skor {lvl.score} — {lvl.label}
                           </span>
-                          {isSelected && <Check className="w-4 h-4 text-white" />}
+                          {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
                         </div>
-                        <p className={`text-[11px] leading-relaxed ${isSelected ? 'text-amber-50' : 'text-stone-500'}`}>
+                        <p className={`text-[11px] leading-relaxed ${isSelected ? 'text-stone-300' : 'text-stone-500'}`}>
                           {lvl.descriptor}
                         </p>
                       </button>
@@ -196,60 +190,59 @@ export const PenilaianSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: Cheerful Live Interactive Grading Simulator Card */}
+        {/* Right: Clean Interactive Grading Simulator Card */}
         <div className="lg:col-span-4 sticky top-24 space-y-6">
-          <div className="bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 text-white rounded-3xl p-7 border-2 border-amber-300 shadow-xl space-y-5">
-            <div className="flex items-center gap-2 text-xs font-bold text-amber-100 bg-white/20 px-3 py-1 rounded-full w-fit backdrop-blur-xs">
+          <div className="bg-stone-900 text-stone-100 rounded-xl p-6 border border-stone-800 space-y-5">
+            <div className="flex items-center gap-2 text-xs font-mono text-stone-400 uppercase tracking-wider">
               <Calculator className="w-4 h-4" />
-              <span>Simulator Penskoran Autentik</span>
+              <span>Simulator Penskoran</span>
             </div>
 
             <div>
-              <p className="text-xs text-amber-100 font-medium">Total Skor Terbobot (Skala 100):</p>
+              <p className="text-xs text-stone-400">Total Nilai Terbobot (0–100):</p>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-5xl font-mono font-bold text-white tabular-nums drop-shadow-sm">
+                <span className="text-4xl font-mono font-bold text-white tabular-nums">
                   {finalScore}
                 </span>
-                <span className="text-sm text-amber-200 font-mono">/ 100</span>
+                <span className="text-xs text-stone-400 font-mono">/ 100</span>
               </div>
             </div>
 
-            {/* Predicate status pill */}
-            <div className={`p-4 rounded-2xl border-2 text-xs space-y-1 shadow-sm ${predicate.color}`}>
-              <div className="font-bold text-xs uppercase tracking-wider">
+            {/* Predicate status */}
+            <div className="p-3.5 rounded-lg border border-stone-700 bg-stone-800 text-xs space-y-1">
+              <div className="font-semibold text-white">
                 Predikat: {predicate.label}
               </div>
-              <p className="text-[11px] leading-relaxed font-medium">
+              <p className="text-[11px] text-stone-300 leading-relaxed">
                 {predicate.note}
               </p>
             </div>
 
             {/* Criteria breakdown */}
-            <div className="space-y-2 pt-2 border-t border-white/20 text-xs">
-              <p className="text-amber-100 font-bold">Rincian Butir Penilaian:</p>
+            <div className="space-y-2 pt-2 border-t border-stone-800 text-xs">
+              <p className="text-stone-400 font-medium">Rincian Butir Penilaian:</p>
               {activeRubric.criteria.map((c) => (
-                <div key={c.name} className="flex items-center justify-between text-white/90 text-[11px]">
+                <div key={c.name} className="flex items-center justify-between text-stone-300 text-[11px]">
                   <span className="truncate max-w-[170px]">{c.name}</span>
-                  <span className="font-mono font-bold bg-white/20 px-1.5 py-0.5 rounded">
-                    Skor {simulatedScores[c.name] || 4}/4
+                  <span className="font-mono text-stone-300">
+                    {simulatedScores[c.name] || 4}/4 ({c.weight}%)
                   </span>
                 </div>
               ))}
             </div>
 
-            <p className="text-[10px] text-amber-100 pt-2 border-t border-white/20 italic">
-              *Pilihlah opsi skor pada kartu kriteria di sebelah kiri untuk melihat simulasi perhitungan nilai siswa secara real-time.
+            <p className="text-[10px] text-stone-400 pt-2 border-t border-stone-800">
+              *Klik opsi skor pada kriteria di samping untuk menguji perhitungan nilai.
             </p>
           </div>
 
-          {/* Profil Pelajar Pancasila Callout with Cheerful Framing */}
-          <div className="bg-white border-2 border-amber-200 rounded-3xl p-6 space-y-2 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-bold text-amber-900 uppercase tracking-wider">
-              <Award className="w-4 h-4 text-orange-600" />
-              <span>Profil Pelajar Pancasila</span>
-            </div>
-            <p className="text-xs text-stone-600 leading-relaxed font-medium">
-              Instrumen ini menginternalisasi 6 dimensi luhur: Beriman & Bertakwa, Berkebinekaan Global, Bergotong Royong, Mandiri, Bernalar Kritis, dan Kreatif.
+          {/* Profil Pelajar Pancasila Info Box */}
+          <div className="bg-white border border-stone-200 rounded-xl p-5 space-y-2">
+            <h4 className="text-xs font-semibold text-stone-900 uppercase tracking-wider">
+              Profil Pelajar Pancasila
+            </h4>
+            <p className="text-xs text-stone-600 leading-relaxed">
+              Penilaian tidak hanya mengukur capaian kognitif, tetapi juga mengintegrasikan 6 dimensi karakter: Beriman & Bertakwa, Berkebinekaan Global, Bergotong Royong, Mandiri, Bernalar Kritis, dan Kreatif.
             </p>
           </div>
         </div>

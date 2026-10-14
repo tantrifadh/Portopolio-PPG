@@ -4,14 +4,7 @@ import {
   ZoomIn, 
   ZoomOut, 
   Upload, 
-  BookOpen, 
-  CheckCircle, 
-  GraduationCap, 
-  Layers, 
-  Sparkles,
-  Download,
-  Info,
-  Award
+  ArrowRight
 } from 'lucide-react';
 import { PdfViewer } from './PdfViewer';
 import { SEMINAR_TASKS } from '../data/portfolioData';
@@ -29,41 +22,41 @@ export const SeminarSection: React.FC<SeminarSectionProps> = ({
   return (
     <div className="space-y-12">
       
-      {/* Header with Cheerful Badge */}
-      <div className="border-b border-amber-200 pb-6">
+      {/* Header */}
+      <div className="border-b border-stone-200 pb-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <span className="text-xs font-bold text-teal-800 bg-teal-100/90 border border-teal-300 px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+            <span className="text-xs font-medium text-stone-500 uppercase tracking-wider block">
               Mata Kuliah Inti PPG Prajabatan
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 mt-2">
               Seminar Kependidikan
             </h1>
-            <p className="text-sm sm:text-base text-stone-700 mt-2 max-w-3xl leading-relaxed">
-              Kumpulan tugas-tugas akademik seminar kependidikan: artikel ilmiah hasil PPL, proposal penelitian tindakan kelas (PTK), jurnal refleksi kritis, dan kajian literatur kurikulum merdeka. Tersedia penampil PDF interaktif dengan fitur perbesar/perkecil tampilan untuk kenyamanan membaca Anda.
+            <p className="text-sm sm:text-base text-stone-600 mt-2 max-w-3xl leading-relaxed">
+              Kumpulan naskah tugas akademik: artikel ilmiah hasil PPL, proposal penelitian tindakan kelas (PTK), jurnal refleksi kritis, dan kajian literatur. Tersedia penampil dokumen dengan fitur perbesar/perkecil tampilan untuk kenyamanan menelaah teks.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Cheerful Feature Guide Banner */}
-      <div className="bg-gradient-to-r from-amber-100 via-orange-100 to-amber-100 border-2 border-amber-300 rounded-3xl p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
-        <div className="flex items-start gap-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-md">
-            <ZoomIn className="w-6 h-6 text-white" />
+      {/* Feature Guide Banner - Clean, Non-AI */}
+      <div className="bg-stone-100 border border-stone-200 rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <div className="w-9 h-9 rounded-lg bg-stone-900 text-stone-100 flex items-center justify-center shrink-0 mt-0.5">
+            <ZoomIn className="w-5 h-5 text-stone-300" />
           </div>
-          <div className="space-y-1">
-            <h3 className="text-base font-bold text-amber-950 flex items-center gap-2">
-              <span>Fitur Penampil PDF Interaktif: Besar / Kecilin Tampilan</span>
-              <span className="text-xs bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full">
-                50% - 250%
-              </span>
+          <div className="space-y-0.5">
+            <h3 className="text-sm font-semibold text-stone-900">
+              Fitur Pembesar & Pengecil Dokumen (Zoom In / Zoom Out)
             </h3>
-            <p className="text-xs sm:text-sm text-amber-900/90 leading-relaxed">
-              Gunakan tombol <strong>Zoom In (+)</strong> dan <strong>Zoom Out (-)</strong> pada toolbar untuk memperbesar dan memperkecil lembar dokumen. Anda juga dapat memilih skala cepat, mencari kata kunci, memutar halaman, mencetak naskah, atau mengunggah berkas tugas PDF Anda sendiri!
+            <p className="text-xs text-stone-600 leading-relaxed">
+              Gunakan tombol <strong>Zoom In (+)</strong> dan <strong>Zoom Out (-)</strong> pada toolbar reader untuk mengatur skala baca (50% hingga 250%). Anda juga dapat membalik halaman, mencari kata kunci, mencetak, atau mengunggah berkas PDF mandiri.
             </p>
           </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0 text-xs font-mono bg-white px-3 py-1.5 rounded border border-stone-200 text-stone-700">
+          <span>Skala: 50% - 250%</span>
         </div>
       </div>
 
@@ -71,11 +64,11 @@ export const SeminarSection: React.FC<SeminarSectionProps> = ({
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold font-serif-title text-stone-900 flex items-center gap-2">
-            <FileText className="w-5 h-5 text-teal-700" />
-            <span>Dokumen PDF Seminar Aktif</span>
+            <FileText className="w-5 h-5 text-stone-700" />
+            <span>Naskah Seminar Aktif</span>
           </h2>
-          <span className="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full hidden sm:inline">
-            ✨ Klik tab dokumen di viewer untuk mengganti naskah
+          <span className="text-xs text-stone-500 hidden sm:inline">
+            Pilih naskah pada bilah samping viewer untuk mengganti dokumen
           </span>
         </div>
 
@@ -83,17 +76,17 @@ export const SeminarSection: React.FC<SeminarSectionProps> = ({
         <PdfViewer initialTaskId={activeTaskId} />
       </section>
 
-      {/* Seminar Papers Catalog List with Cheerful Cards */}
-      <section className="space-y-6 pt-6 border-t-2 border-amber-200">
+      {/* Seminar Papers Catalog List */}
+      <section className="space-y-6 pt-6 border-t border-stone-200">
         <div>
-          <span className="text-xs font-bold text-orange-800 tracking-wider uppercase">
+          <span className="text-xs font-medium text-stone-500 tracking-wider uppercase">
             Katalog Naskah
           </span>
           <h2 className="text-2xl font-bold font-serif-title text-stone-900 mt-1">
             Daftar Lengkap Tugas Seminar Kependidikan
           </h2>
           <p className="text-sm text-stone-600 mt-1">
-            Rangkuman abstrak, dosen pengampu, dan nilai kelulusan untuk setiap naskah tugas seminar.
+            Rangkuman abstrak, dosen pengampu, dan capaian penilaian untuk setiap naskah tugas.
           </p>
         </div>
 
@@ -103,27 +96,25 @@ export const SeminarSection: React.FC<SeminarSectionProps> = ({
             return (
               <div
                 key={task.id}
-                className={`bg-white border-2 rounded-2xl p-6 transition-all ${
+                className={`bg-white border rounded-xl p-6 transition-all ${
                   isCurrent
-                    ? 'border-amber-400 bg-amber-50/20 ring-2 ring-amber-300/60 shadow-md'
-                    : 'border-stone-200/90 hover:border-amber-300 shadow-xs'
+                    ? 'border-stone-900 ring-1 ring-stone-900/10 shadow-xs'
+                    : 'border-stone-200 hover:border-stone-300'
                 }`}
               >
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                   
                   <div className="space-y-3 flex-1">
-                    <div className="flex flex-wrap items-center gap-2 text-xs">
-                      <span className="font-mono text-amber-900 font-bold bg-amber-100 px-2.5 py-0.5 rounded-md border border-amber-200">
+                    <div className="flex flex-wrap items-center gap-2 text-xs text-stone-500">
+                      <span className="font-mono text-stone-800 font-semibold bg-stone-100 px-2.5 py-0.5 rounded">
                         {task.code}
                       </span>
-                      <span aria-hidden="true" className="text-stone-300">·</span>
-                      <span className="font-semibold text-stone-700">{task.category}</span>
-                      <span aria-hidden="true" className="text-stone-300">·</span>
-                      <span className="text-stone-500">{task.pagesCount} Halaman</span>
-                      <span aria-hidden="true" className="text-stone-300">·</span>
-                      <span className="font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200">
-                        {task.grade}
-                      </span>
+                      <span aria-hidden="true">·</span>
+                      <span>{task.category}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>{task.pagesCount} Halaman</span>
+                      <span aria-hidden="true">·</span>
+                      <span className="font-semibold text-stone-800">{task.grade}</span>
                     </div>
 
                     <h3 className="text-lg font-bold font-serif-title text-stone-900 leading-snug">
@@ -136,15 +127,15 @@ export const SeminarSection: React.FC<SeminarSectionProps> = ({
                       <span><strong>Tanggal:</strong> {task.date}</span>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-stone-700 leading-relaxed text-justify pt-1">
+                    <p className="text-xs sm:text-sm text-stone-600 leading-relaxed text-justify pt-1">
                       <strong>Abstrak:</strong> {task.abstractIndo}
                     </p>
 
-                    {/* Keywords with cheerful styling */}
+                    {/* Keywords */}
                     <div className="pt-2 flex flex-wrap items-center gap-1.5 text-[11px] text-stone-600">
-                      <span className="font-bold text-stone-800">Kata Kunci:</span>
+                      <span className="font-medium text-stone-800">Kata Kunci:</span>
                       {task.keywords.map((kw, kwIdx) => (
-                        <span key={kwIdx} className="bg-amber-50 border border-amber-200 text-amber-950 font-medium px-2 py-0.5 rounded-md">
+                        <span key={kwIdx} className="bg-stone-100 text-stone-700 px-2 py-0.5 rounded">
                           {kw}
                         </span>
                       ))}
@@ -158,10 +149,10 @@ export const SeminarSection: React.FC<SeminarSectionProps> = ({
                         setActiveTaskId(task.id);
                         window.scrollTo({ top: 380, behavior: 'smooth' });
                       }}
-                      className="w-full md:w-auto px-5 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-102 cursor-pointer"
+                      className="w-full md:w-auto px-4 py-2 text-xs font-semibold text-stone-800 bg-stone-100 hover:bg-stone-200 border border-stone-200 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer"
                     >
-                      <ZoomIn className="w-3.5 h-3.5" />
-                      <span>Muat ke Pembaca PDF</span>
+                      <ZoomIn className="w-3.5 h-3.5 text-stone-600" />
+                      <span>Muat ke Penampil PDF</span>
                     </button>
                   </div>
 

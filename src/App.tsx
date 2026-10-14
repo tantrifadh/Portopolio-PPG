@@ -41,7 +41,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF5] text-stone-900 flex flex-col font-sans selection:bg-amber-200 selection:text-amber-950">
+    <div className="min-h-screen bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-stone-200 selection:text-stone-900">
       
       {/* Top 3-Zone Navigation Bar */}
       <Navbar

@@ -9,8 +9,7 @@ import {
   ChevronLeft, 
   ChevronRight,
   ZoomIn,
-  ZoomOut,
-  Sparkles
+  ZoomOut
 } from 'lucide-react';
 import { DocumentationPhoto } from '../types/portfolio';
 import { DOCUMENTATION_PHOTOS } from '../data/portfolioData';
@@ -61,29 +60,28 @@ export const DokumentasiSection: React.FC = () => {
     <div className="space-y-12">
       
       {/* Header */}
-      <div className="border-b border-amber-200 pb-6">
-        <span className="text-xs font-bold text-purple-800 bg-purple-100/90 border border-purple-300 px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
-          <Sparkles className="w-3.5 h-3.5 text-purple-600" />
-          Galeri Pembelajaran & Rekam Jejak
+      <div className="border-b border-stone-200 pb-6">
+        <span className="text-xs font-medium text-stone-500 uppercase tracking-wider block">
+          Galeri & Dokumentasi Lapangan
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 mt-2">
           Dokumentasi Pembelajaran
         </h1>
-        <p className="text-sm sm:text-base text-stone-700 mt-2 max-w-3xl leading-relaxed">
-          Bukti autentik dinamika ruang kelas yang menyenangkan, interaksi bimbingan peserta didik, presentasi riset seminar ilmiah, dan kolaborasi bersama rekan guru pamong.
+        <p className="text-sm sm:text-base text-stone-600 mt-2 max-w-3xl leading-relaxed">
+          Rekaman visual interaksi kelas, bimbingan investigasi saintifik peserta didik, pemaparan hasil tindakan pada seminar, dan kolaborasi profesional bersama rekan guru.
         </p>
       </div>
 
-      {/* Cheerful Filter Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2">
+      {/* Filter Tabs */}
+      <div className="flex items-center gap-1.5 p-1 bg-stone-100 rounded-lg w-fit max-w-full overflow-x-auto">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               activeCategory === cat
-                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-sm scale-102'
-                : 'bg-white text-stone-700 border-2 border-stone-200 hover:border-amber-300 hover:bg-amber-50'
+                ? 'bg-white text-stone-900 shadow-2xs font-semibold'
+                : 'text-stone-600 hover:text-stone-900'
             }`}
           >
             {cat}
@@ -97,31 +95,31 @@ export const DokumentasiSection: React.FC = () => {
           <div
             key={photo.id}
             onClick={() => openLightbox(photo.id)}
-            className="group bg-white border-2 border-stone-200/90 rounded-3xl overflow-hidden shadow-xs hover:border-amber-400 hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer"
+            className="group bg-white border border-stone-200 rounded-xl overflow-hidden hover:border-stone-400 transition-colors flex flex-col cursor-pointer"
           >
-            {/* Image Container with Joyful Badge */}
-            <div className="relative aspect-[16/10] overflow-hidden bg-amber-50">
+            {/* Image Container */}
+            <div className="relative aspect-[16/10] overflow-hidden bg-stone-100">
               <img
                 src={photo.imageUrl}
                 alt={photo.title}
-                className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-stone-950/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="inline-flex items-center gap-2 px-4 py-2 bg-white text-stone-900 text-xs font-bold rounded-full shadow-lg">
-                  <Maximize2 className="w-3.5 h-3.5 text-amber-600" />
-                  Perbesar Foto
+              <div className="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white text-stone-900 text-xs font-medium rounded shadow-sm">
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  Buka Gambar
                 </span>
               </div>
-              <div className="absolute top-3 left-3 bg-white/95 text-stone-900 border border-amber-300 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">
+              <div className="absolute top-3 left-3 bg-stone-900/80 text-white text-[11px] px-2.5 py-1 rounded">
                 {photo.category}
               </div>
             </div>
 
             {/* Content Details */}
             <div className="p-6 flex-1 flex flex-col justify-between space-y-3">
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold font-serif-title text-stone-900 group-hover:text-amber-800 transition-colors leading-snug">
+              <div className="space-y-1.5">
+                <h3 className="text-lg font-bold font-serif-title text-stone-900 group-hover:text-stone-700 transition-colors leading-snug">
                   {photo.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
@@ -130,19 +128,19 @@ export const DokumentasiSection: React.FC = () => {
               </div>
 
               {/* Metadata */}
-              <div className="pt-4 border-t border-stone-100 flex flex-wrap items-center justify-between gap-y-2 text-xs text-stone-500 font-medium">
+              <div className="pt-4 border-t border-stone-100 flex flex-wrap items-center justify-between gap-y-2 text-xs text-stone-500">
                 <div className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-orange-600" />
+                  <MapPin className="w-3.5 h-3.5 text-stone-400" />
                   <span>{photo.location}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-teal-600" />
+                    <Calendar className="w-3.5 h-3.5 text-stone-400" />
                     {photo.date}
                   </span>
                   {photo.attendeesCount && (
-                    <span className="flex items-center gap-1 text-amber-800 font-bold bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-                      <Users className="w-3.5 h-3.5 text-amber-700" />
+                    <span className="flex items-center gap-1 text-stone-700">
+                      <Users className="w-3.5 h-3.5 text-stone-400" />
                       {photo.attendeesCount}
                     </span>
                   )}
@@ -153,64 +151,63 @@ export const DokumentasiSection: React.FC = () => {
         ))}
       </div>
 
-      {/* Interactive Lightbox Modal */}
+      {/* Lightbox Modal */}
       {currentPhoto && (
         <div 
           onClick={closeLightbox}
-          className="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-xs flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-150"
         >
-          {/* Lightbox Toolbar with Cheerful Buttons */}
+          {/* Lightbox Toolbar */}
           <div 
             onClick={(e) => e.stopPropagation()}
             className="absolute top-4 right-4 z-10 flex items-center gap-2"
           >
-            {/* Zoom In / Out in Lightbox */}
             <button
               onClick={() => setLightboxZoom(prev => Math.min(prev + 25, 200))}
-              className="p-2.5 rounded-xl bg-white text-stone-900 hover:bg-amber-100 border border-stone-300 transition-colors shadow-md cursor-pointer"
-              title="Perbesar Foto"
+              className="p-2 rounded bg-stone-900 text-white hover:bg-stone-800 border border-stone-700 transition-colors cursor-pointer"
+              title="Perbesar"
             >
-              <ZoomIn className="w-4 h-4 text-emerald-600" />
+              <ZoomIn className="w-4 h-4" />
             </button>
             <button
               onClick={() => setLightboxZoom(prev => Math.max(prev - 25, 75))}
-              className="p-2.5 rounded-xl bg-white text-stone-900 hover:bg-amber-100 border border-stone-300 transition-colors shadow-md cursor-pointer"
-              title="Perkecil Foto"
+              className="p-2 rounded bg-stone-900 text-white hover:bg-stone-800 border border-stone-700 transition-colors cursor-pointer"
+              title="Perkecil"
             >
-              <ZoomOut className="w-4 h-4 text-orange-600" />
+              <ZoomOut className="w-4 h-4" />
             </button>
             <button
               onClick={closeLightbox}
-              className="p-2.5 rounded-xl bg-white text-stone-900 hover:bg-rose-100 border border-stone-300 transition-colors shadow-md cursor-pointer"
-              title="Tutup Galeri (ESC)"
+              className="p-2 rounded bg-stone-900 text-white hover:bg-stone-800 border border-stone-700 transition-colors cursor-pointer"
+              title="Tutup (ESC)"
             >
-              <X className="w-4 h-4 text-rose-600" />
+              <X className="w-4 h-4" />
             </button>
           </div>
 
           {/* Navigation Arrows */}
           <button
             onClick={handlePrevPhoto}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-white/90 text-stone-900 hover:bg-amber-100 border border-stone-200 transition-colors hidden sm:block z-10 shadow-lg cursor-pointer"
-            title="Foto Sebelumnya"
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-stone-900/80 text-white hover:bg-stone-800 transition-colors hidden sm:block z-10 cursor-pointer"
+            title="Sebelumnya"
           >
-            <ChevronLeft className="w-6 h-6 text-stone-800" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
 
           <button
             onClick={handleNextPhoto}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-white/90 text-stone-900 hover:bg-amber-100 border border-stone-200 transition-colors hidden sm:block z-10 shadow-lg cursor-pointer"
-            title="Foto Selanjutnya"
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-stone-900/80 text-white hover:bg-stone-800 transition-colors hidden sm:block z-10 cursor-pointer"
+            title="Selanjutnya"
           >
-            <ChevronRight className="w-6 h-6 text-stone-800" />
+            <ChevronRight className="w-5 h-5" />
           </button>
 
           {/* Lightbox Content Container */}
           <div 
             onClick={(e) => e.stopPropagation()}
-            className="max-w-4xl w-full bg-white rounded-3xl overflow-hidden border-2 border-amber-300 shadow-2xl flex flex-col max-h-[90vh]"
+            className="max-w-4xl w-full bg-stone-900 text-stone-100 rounded-xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
           >
-            <div className="overflow-auto flex-1 flex items-center justify-center p-4 bg-stone-100">
+            <div className="overflow-auto flex-1 flex items-center justify-center p-4 bg-stone-950">
               <img
                 src={currentPhoto.imageUrl}
                 alt={currentPhoto.title}
@@ -218,22 +215,20 @@ export const DokumentasiSection: React.FC = () => {
                   transform: `scale(${lightboxZoom / 100})`,
                   transition: 'transform 0.2s ease-out'
                 }}
-                className="max-h-[65vh] w-auto object-contain rounded-xl shadow-md"
+                className="max-h-[65vh] w-auto object-contain rounded"
                 referrerPolicy="no-referrer"
               />
             </div>
 
-            <div className="p-6 bg-white border-t-2 border-amber-100 space-y-2">
-              <div className="flex items-center justify-between text-xs text-stone-500 font-medium">
-                <span className="font-mono text-amber-900 font-bold bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-200">
-                  {currentPhoto.category}
-                </span>
+            <div className="p-6 bg-stone-900 border-t border-stone-800 space-y-2">
+              <div className="flex items-center justify-between text-xs text-stone-400">
+                <span className="font-mono text-stone-300">{currentPhoto.category}</span>
                 <span>{currentPhoto.date} · {currentPhoto.location}</span>
               </div>
-              <h3 className="text-lg font-bold font-serif-title text-stone-900">
+              <h3 className="text-lg font-bold font-serif-title text-white">
                 {currentPhoto.title}
               </h3>
-              <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+              <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
                 {currentPhoto.caption}
               </p>
             </div>

@@ -12,13 +12,7 @@ import {
   ChevronRight, 
   Upload, 
   FileText, 
-  CheckCircle, 
-  RotateCcw,
-  BookOpen,
-  Layers,
-  Sparkles,
-  ExternalLink,
-  SlidersHorizontal
+  Layers
 } from 'lucide-react';
 import { SeminarTask } from '../types/portfolio';
 import { SEMINAR_TASKS } from '../data/portfolioData';
@@ -71,7 +65,7 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
   };
 
   const handleFitToWidth = () => {
-    setZoomLevel(130);
+    setZoomLevel(125);
   };
 
   const handleRotate = () => {
@@ -124,10 +118,10 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
         semester: 'Tahun Akademik Berjalan',
         date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
         pagesCount: 1,
-        grade: 'Dokumen Asli (.pdf)',
+        grade: 'Berkas Asli (.pdf)',
         category: 'Artikel Ilmiah',
-        abstractIndo: `File PDF lokal '${file.name}' telah berhasil dimuat ke dalam penampil dokumen interaktif dengan fitur perbesar/perkecil (zoom in/out).`,
-        abstractEng: `Local PDF file '${file.name}' has been loaded into the interactive reader with zoom in/out capabilities.`,
+        abstractIndo: `Berkas PDF '${file.name}' dimuat dalam penampil dokumen interaktif dengan kontrol perbesaran (zoom in/out).`,
+        abstractEng: `Local PDF file '${file.name}' loaded into the interactive reader.`,
         keywords: ['PDF Unggahan', 'Seminar Kependidikan', 'Dokumen Mandiri'],
         customPdfUrl: fileUrl,
         pages: [
@@ -137,7 +131,7 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
             sections: [
               {
                 heading: 'DOKUMEN PDF BERHASIL DIMUAT',
-                content: `File "${file.name}" aktif ditayangkan dalam penampil PDF interaktif. Anda dapat memperbesar/memperkecil tampilan dengan tombol Zoom In/Out di atas.`
+                content: `Berkas "${file.name}" ditayangkan dalam penampil dokumen. Anda dapat mengatur skala baca dengan tombol Zoom In/Out di atas.`
               }
             ]
           }
@@ -208,108 +202,95 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
     const parts = text.split(new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'));
     return parts.map((part, i) => 
       part.toLowerCase() === searchQuery.toLowerCase() ? (
-        <mark key={i} className="bg-amber-300 text-stone-950 font-semibold rounded-xs px-1 shadow-xs">{part}</mark>
+        <mark key={i} className="bg-yellow-200 text-stone-900 px-0.5 rounded-xs">{part}</mark>
       ) : part
     );
-  };
-
-  const getCategoryBadge = (category: string) => {
-    switch (category) {
-      case 'PTK': return 'bg-orange-100 text-orange-900 border-orange-200';
-      case 'Refleksi': return 'bg-purple-100 text-purple-900 border-purple-200';
-      case 'Inovasi Digital': return 'bg-teal-100 text-teal-900 border-teal-200';
-      case 'Kajian Literatur': return 'bg-blue-100 text-blue-900 border-blue-200';
-      default: return 'bg-amber-100 text-amber-900 border-amber-200';
-    }
   };
 
   return (
     <div 
       ref={viewerContainerRef}
-      className={`flex flex-col bg-white text-stone-800 rounded-3xl border-2 border-amber-200 shadow-xl overflow-hidden transition-all ${
+      className={`flex flex-col bg-stone-100 text-stone-800 rounded-2xl border border-stone-300 shadow-sm overflow-hidden transition-all ${
         isFullscreen ? 'fixed inset-0 z-50 rounded-none border-0' : 'w-full min-h-[780px]'
       }`}
     >
-      {/* Top Cheerful Toolbar - PDF Control Ribbon */}
-      <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 border-b-2 border-amber-200 px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs select-none">
+      {/* Clean Document Reader Toolbar */}
+      <div className="bg-white border-b border-stone-200 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs select-none">
         
-        {/* Left: Document Identity & Switcher button */}
+        {/* Left: Document Identity & Switcher toggle */}
         <div className="flex items-center gap-3 min-w-0">
-          <div className="flex items-center gap-2.5">
-            <span className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center shrink-0 font-bold font-mono shadow-xs">
+          <div className="flex items-center gap-2">
+            <span className="w-7 h-7 rounded bg-stone-100 border border-stone-200 text-stone-700 flex items-center justify-center shrink-0 font-mono text-[11px] font-semibold">
               PDF
             </span>
             <div className="truncate">
-              <p className="font-bold text-stone-900 truncate max-w-[200px] sm:max-w-[320px]">
+              <p className="font-semibold text-stone-900 truncate max-w-[200px] sm:max-w-[320px]">
                 {selectedTask.title}
               </p>
-              <div className="flex items-center gap-2 text-[11px] text-stone-600 font-medium">
-                <span className="text-amber-800 font-bold">{selectedTask.code}</span>
-                <span aria-hidden="true" className="text-stone-400">·</span>
+              <div className="flex items-center gap-2 text-[11px] text-stone-500">
+                <span>{selectedTask.code}</span>
+                <span aria-hidden="true">·</span>
                 <span>{selectedTask.pagesCount} Halaman</span>
-                <span aria-hidden="true" className="text-stone-400">·</span>
-                <span className="text-teal-700 font-bold">{selectedTask.grade}</span>
+                <span aria-hidden="true">·</span>
+                <span className="text-stone-700 font-medium">{selectedTask.grade}</span>
               </div>
             </div>
           </div>
 
           <button
             onClick={() => setShowThumbnails(!showThumbnails)}
-            className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
+            className={`px-2.5 py-1.5 rounded border text-xs font-medium transition-colors flex items-center gap-1.5 cursor-pointer ${
               showThumbnails 
-                ? 'bg-amber-200/80 border-amber-400 text-amber-950 shadow-xs' 
-                : 'bg-white border-amber-200 text-stone-700 hover:bg-amber-100/60'
+                ? 'bg-stone-100 border-stone-300 text-stone-900' 
+                : 'bg-white border-stone-200 text-stone-600 hover:text-stone-900 hover:bg-stone-50'
             }`}
-            title="Tampilkan daftar tugas & thumbnail halaman"
+            title="Daftar naskah dan halaman"
           >
-            <Layers className="w-3.5 h-3.5 text-amber-800" />
-            <span className="hidden sm:inline">Daftar Dokumen</span>
+            <Layers className="w-3.5 h-3.5 text-stone-500" />
+            <span className="hidden sm:inline">Daftar Naskah</span>
           </button>
         </div>
 
-        {/* Center: CORE FEATURE - FITUR BESAR/KECILIN PDF (Cheerful Zoom Controls) */}
-        <div className="flex items-center gap-1.5 bg-white border-2 border-amber-300 rounded-2xl p-1 shadow-xs">
-          
+        {/* Center: CORE FEATURE - BESAR / KECILIN PDF (Zoom Controls) */}
+        <div className="flex items-center gap-1 bg-stone-50 border border-stone-200 rounded-lg p-0.5">
           {/* Zoom Out Button (Perkecil) */}
           <button
             onClick={handleZoomOut}
             disabled={zoomLevel <= 50}
-            className="p-1.5 rounded-xl text-stone-700 hover:text-amber-900 hover:bg-amber-100 disabled:opacity-30 disabled:hover:bg-transparent transition-colors flex items-center gap-1 cursor-pointer"
+            className="p-1.5 rounded hover:bg-white text-stone-700 disabled:opacity-30 disabled:hover:bg-transparent transition-colors cursor-pointer"
             title="Perkecil PDF (Zoom Out)"
           >
-            <ZoomOut className="w-4 h-4 text-orange-600" />
+            <ZoomOut className="w-4 h-4" />
             <span className="sr-only">Perkecil PDF</span>
           </button>
 
-          {/* Zoom Level Indicator / Selector */}
-          <div className="relative group">
-            <button
-              onClick={handleResetZoom}
-              className="px-2.5 py-1 text-center font-mono font-bold text-amber-950 bg-amber-50 hover:bg-amber-200 rounded-lg transition-colors min-w-[62px] border border-amber-200 cursor-pointer"
-              title="Klik untuk reset ke 100%"
-            >
-              {zoomLevel}%
-            </button>
-          </div>
+          {/* Zoom Percentage Display */}
+          <button
+            onClick={handleResetZoom}
+            className="px-2 py-1 text-center font-mono text-xs font-medium text-stone-800 hover:bg-white rounded transition-colors min-w-[54px] cursor-pointer"
+            title="Reset ke 100%"
+          >
+            {zoomLevel}%
+          </button>
 
           {/* Zoom In Button (Perbesar) */}
           <button
             onClick={handleZoomIn}
             disabled={zoomLevel >= 250}
-            className="p-1.5 rounded-xl text-stone-700 hover:text-amber-900 hover:bg-amber-100 disabled:opacity-30 disabled:hover:bg-transparent transition-colors flex items-center gap-1 cursor-pointer"
+            className="p-1.5 rounded hover:bg-white text-stone-700 disabled:opacity-30 disabled:hover:bg-transparent transition-colors cursor-pointer"
             title="Perbesar PDF (Zoom In)"
           >
-            <ZoomIn className="w-4 h-4 text-emerald-600" />
+            <ZoomIn className="w-4 h-4" />
             <span className="sr-only">Perbesar PDF</span>
           </button>
 
-          <div className="w-px h-5 bg-amber-200 mx-0.5" />
+          <div className="w-px h-4 bg-stone-200 mx-1" />
 
           {/* Fit to width */}
           <button
             onClick={handleFitToWidth}
-            className="px-2.5 py-1 rounded-lg text-[11px] font-bold text-amber-800 hover:bg-amber-100 transition-colors hidden md:inline-block cursor-pointer"
-            title="Sesuaikan Lebar Halaman"
+            className="px-2 py-1 rounded text-[11px] font-medium text-stone-600 hover:bg-white transition-colors hidden md:inline-block cursor-pointer"
+            title="Sesuaikan lebar halaman"
           >
             Pas Lebar
           </button>
@@ -317,57 +298,57 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
           {/* Reset 100% */}
           <button
             onClick={handleResetZoom}
-            className="px-2.5 py-1 rounded-lg text-[11px] font-bold text-stone-600 hover:bg-stone-100 transition-colors hidden md:inline-block cursor-pointer"
-            title="Reset Ukuran Normal (100%)"
+            className="px-2 py-1 rounded text-[11px] font-medium text-stone-600 hover:bg-white transition-colors hidden md:inline-block cursor-pointer"
+            title="Reset ke ukuran asli"
           >
             100%
           </button>
         </div>
 
-        {/* Right: Page Navigation, Rotation, Actions */}
-        <div className="flex items-center gap-2">
+        {/* Right: Page Navigation, Search & Actions */}
+        <div className="flex items-center gap-1.5">
           {/* Page Prev/Next */}
-          <div className="flex items-center gap-1 bg-white border-2 border-amber-200 rounded-xl p-1 shadow-xs">
+          <div className="flex items-center gap-1 bg-stone-50 border border-stone-200 rounded-lg p-0.5">
             <button
               onClick={handlePrevPage}
               disabled={currentPage <= 1}
-              className="p-1 rounded-lg text-stone-700 hover:text-amber-900 hover:bg-amber-100 disabled:opacity-30 transition-colors cursor-pointer"
-              title="Halaman Sebelumnya"
+              className="p-1 rounded text-stone-700 hover:bg-white disabled:opacity-30 transition-colors cursor-pointer"
+              title="Halaman sebelumnya"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
 
-            <span className="text-[11px] font-mono font-bold px-1.5 text-stone-800 whitespace-nowrap">
+            <span className="text-[11px] font-mono px-1.5 text-stone-700 whitespace-nowrap">
               {currentPage} / {selectedTask.pagesCount}
             </span>
 
             <button
               onClick={handleNextPage}
               disabled={currentPage >= selectedTask.pagesCount}
-              className="p-1 rounded-lg text-stone-700 hover:text-amber-900 hover:bg-amber-100 disabled:opacity-30 transition-colors cursor-pointer"
-              title="Halaman Selanjutnya"
+              className="p-1 rounded text-stone-700 hover:bg-white disabled:opacity-30 transition-colors cursor-pointer"
+              title="Halaman selanjutnya"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Search in document */}
+          {/* Text Search */}
           <div className="relative hidden lg:block">
             <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400" />
             <input
               type="text"
-              placeholder="Cari kata di PDF..."
+              placeholder="Cari kata di teks..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-8 pr-2.5 py-1.5 bg-white border border-amber-200 rounded-xl text-xs text-stone-800 placeholder-stone-400 focus:outline-none focus:border-amber-500 w-32 focus:w-44 transition-all shadow-2xs"
+              className="pl-8 pr-2.5 py-1 bg-white border border-stone-200 rounded text-xs text-stone-800 placeholder-stone-400 focus:outline-none focus:border-stone-400 w-32 focus:w-40 transition-all"
             />
           </div>
 
           {/* Rotate */}
           <button
             onClick={handleRotate}
-            className="p-2 rounded-xl border border-amber-200 bg-white text-stone-600 hover:text-amber-900 hover:bg-amber-50 transition-colors hidden sm:block cursor-pointer shadow-2xs"
-            title="Putar 90 Derajat"
+            className="p-1.5 rounded border border-stone-200 bg-white text-stone-600 hover:text-stone-900 hover:bg-stone-50 transition-colors hidden sm:block cursor-pointer"
+            title="Putar naskah"
           >
             <RotateCw className="w-3.5 h-3.5" />
           </button>
@@ -375,26 +356,26 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
           {/* Download */}
           <button
             onClick={handleDownload}
-            className="p-2 rounded-xl border border-amber-200 bg-white text-stone-600 hover:text-amber-900 hover:bg-amber-50 transition-colors cursor-pointer shadow-2xs"
-            title="Unduh Dokumen Tugas"
+            className="p-1.5 rounded border border-stone-200 bg-white text-stone-600 hover:text-stone-900 hover:bg-stone-50 transition-colors cursor-pointer"
+            title="Unduh naskah"
           >
-            <Download className="w-3.5 h-3.5 text-teal-600" />
+            <Download className="w-3.5 h-3.5" />
           </button>
 
           {/* Print */}
           <button
             onClick={handlePrint}
-            className="p-2 rounded-xl border border-amber-200 bg-white text-stone-600 hover:text-amber-900 hover:bg-amber-50 transition-colors hidden sm:block cursor-pointer shadow-2xs"
-            title="Cetak Dokumen"
+            className="p-1.5 rounded border border-stone-200 bg-white text-stone-600 hover:text-stone-900 hover:bg-stone-50 transition-colors hidden sm:block cursor-pointer"
+            title="Cetak naskah"
           >
-            <Printer className="w-3.5 h-3.5 text-orange-600" />
+            <Printer className="w-3.5 h-3.5" />
           </button>
 
           {/* Fullscreen */}
           <button
             onClick={handleToggleFullscreen}
-            className="p-2 rounded-xl border border-amber-200 bg-white text-stone-600 hover:text-amber-900 hover:bg-amber-50 transition-colors cursor-pointer shadow-2xs"
-            title={isFullscreen ? 'Keluar Layar Penuh' : 'Mode Layar Penuh'}
+            className="p-1.5 rounded border border-stone-200 bg-white text-stone-600 hover:text-stone-900 hover:bg-stone-50 transition-colors cursor-pointer"
+            title={isFullscreen ? 'Keluar layar penuh' : 'Layar penuh'}
           >
             {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
           </button>
@@ -405,12 +386,12 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
       <div className="flex-1 flex overflow-hidden relative min-h-[640px]">
         {/* Document List Sidebar */}
         {showThumbnails && (
-          <aside className="w-76 bg-stone-50/95 border-r-2 border-amber-200 flex flex-col shrink-0 overflow-y-auto p-3.5 text-xs z-10">
-            <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-amber-200">
-              <span className="font-bold text-stone-800">Koleksi Tugas Seminar</span>
+          <aside className="w-72 bg-white border-r border-stone-200 flex flex-col shrink-0 overflow-y-auto p-3 text-xs z-10">
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-stone-200">
+              <span className="font-semibold text-stone-800">Daftar Naskah Seminar</span>
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white rounded-lg text-[11px] font-bold transition-all shadow-xs cursor-pointer"
+                className="flex items-center gap-1 px-2.5 py-1 bg-stone-900 hover:bg-stone-800 text-white rounded text-[11px] font-medium transition-colors cursor-pointer"
                 title="Unggah file PDF tugas Anda sendiri"
               >
                 <Upload className="w-3 h-3" />
@@ -425,35 +406,29 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
               />
             </div>
 
-            <div className="space-y-2 mb-4">
+            <div className="space-y-1.5 mb-4">
               {customTasks.map((task) => {
                 const isSelected = selectedTask.id === task.id;
                 return (
                   <button
                     key={task.id}
                     onClick={() => setSelectedTask(task)}
-                    className={`w-full text-left p-3 rounded-2xl border-2 transition-all cursor-pointer ${
+                    className={`w-full text-left p-2.5 rounded-lg border transition-colors cursor-pointer ${
                       isSelected
-                        ? 'bg-amber-100/80 border-amber-400 text-stone-900 shadow-sm'
-                        : 'bg-white border-stone-200/90 text-stone-600 hover:border-amber-300 hover:bg-amber-50/50'
+                        ? 'bg-stone-100 border-stone-400 text-stone-950 font-medium'
+                        : 'bg-white border-stone-200 text-stone-600 hover:bg-stone-50'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-1 mb-1">
-                      <span className="font-mono text-[10px] text-amber-800 font-bold">
-                        {task.code}
-                      </span>
-                      <span className="text-[10px] text-stone-500">
-                        {task.date}
-                      </span>
+                    <div className="flex items-center justify-between text-[11px] text-stone-500 mb-0.5">
+                      <span className="font-mono">{task.code}</span>
+                      <span>{task.pagesCount} Hlm</span>
                     </div>
-                    <p className="font-bold text-stone-900 line-clamp-2 leading-snug">
+                    <p className="text-xs text-stone-800 line-clamp-2 leading-snug">
                       {task.title}
                     </p>
-                    <div className="flex items-center justify-between mt-2 pt-2 border-t border-amber-200/60 text-[11px]">
-                      <span className={`px-2 py-0.5 rounded-full border text-[10px] font-bold ${getCategoryBadge(task.category)}`}>
-                        {task.category}
-                      </span>
-                      <span className="text-teal-700 font-bold">{task.grade}</span>
+                    <div className="flex items-center justify-between mt-2 pt-1 border-t border-stone-100 text-[11px] text-stone-500">
+                      <span>{task.category}</span>
+                      <span className="font-medium text-stone-700">{task.grade}</span>
                     </div>
                   </button>
                 );
@@ -461,24 +436,24 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
             </div>
 
             {/* Page thumbnails for selected task */}
-            <div className="mt-auto pt-3 border-t-2 border-amber-200">
-              <p className="font-bold text-stone-700 mb-2">Halaman Dokumen Ini</p>
+            <div className="mt-auto pt-3 border-t border-stone-200">
+              <p className="font-medium text-stone-600 mb-2">Halaman Dokumen</p>
               <div className="grid grid-cols-2 gap-2">
                 {selectedTask.pages.map((page) => (
                   <button
                     key={page.pageNumber}
                     onClick={() => setCurrentPage(page.pageNumber)}
-                    className={`flex flex-col items-center p-2 rounded-xl border-2 text-center transition-all cursor-pointer ${
+                    className={`flex flex-col items-center p-2 rounded border text-center transition-colors cursor-pointer ${
                       currentPage === page.pageNumber
-                        ? 'border-amber-500 bg-amber-100 text-amber-950 font-bold shadow-xs'
-                        : 'border-stone-200 bg-white text-stone-600 hover:border-amber-300'
+                        ? 'border-stone-800 bg-stone-100 text-stone-900 font-medium'
+                        : 'border-stone-200 bg-white text-stone-500 hover:border-stone-300'
                     }`}
                   >
-                    <div className="w-12 h-16 bg-white rounded-md shadow-xs mb-1 flex items-center justify-center text-[10px] font-mono font-bold text-stone-800 border border-stone-300">
+                    <div className="w-12 h-16 bg-stone-50 rounded-xs shadow-2xs mb-1 flex items-center justify-center text-[10px] font-mono text-stone-700 border border-stone-200">
                       Hal {page.pageNumber}
                     </div>
                     <span className="text-[10px] truncate max-w-full">
-                      Hal. {page.pageNumber}
+                      Halaman {page.pageNumber}
                     </span>
                   </button>
                 ))}
@@ -487,14 +462,14 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
           </aside>
         )}
 
-        {/* Center Paper Canvas with Cheerful Background and Smooth Zoom Scale */}
-        <div className="flex-1 bg-[#F5F4EE] overflow-auto flex items-start justify-center p-6 md:p-10 relative">
+        {/* Center Paper Canvas with Smooth Zoom Scaling */}
+        <div className="flex-1 bg-stone-200/50 overflow-auto flex items-start justify-center p-6 md:p-10 relative">
           
-          {/* Cheerful Zoom notification pill */}
-          <div className="absolute bottom-4 right-4 z-20 bg-white/95 border-2 border-amber-300 px-3.5 py-1.5 rounded-full text-[11px] text-stone-700 shadow-md flex items-center gap-2 backdrop-blur-sm">
-            <span>Perbesaran: <strong className="text-amber-800 font-mono font-bold">{zoomLevel}%</strong></span>
+          {/* Subtle zoom indicator */}
+          <div className="absolute bottom-4 right-4 z-20 bg-white border border-stone-300 px-3 py-1.5 rounded-md text-[11px] text-stone-600 shadow-sm flex items-center gap-2">
+            <span>Perbesaran: <strong className="font-mono text-stone-900">{zoomLevel}%</strong></span>
             <span aria-hidden="true" className="text-stone-300">·</span>
-            <span className="text-stone-500 font-medium">Gunakan tombol + / - untuk besar/kecilkan</span>
+            <span>Gunakan + / - untuk mengatur skala</span>
           </div>
 
           {/* If custom PDF URL is loaded */}
@@ -503,9 +478,9 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
               style={{
                 transform: `scale(${zoomLevel / 100}) rotate(${rotation}deg)`,
                 transformOrigin: 'top center',
-                transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+                transition: 'transform 0.2s ease-out'
               }}
-              className="w-full max-w-4xl h-[850px] bg-white rounded-2xl shadow-xl overflow-hidden border border-stone-200"
+              className="w-full max-w-4xl h-[850px] bg-white rounded-lg shadow-sm overflow-hidden border border-stone-300"
             >
               <iframe
                 src={selectedTask.customPdfUrl}
@@ -514,21 +489,16 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
               />
             </div>
           ) : (
-            /* Vector-Crisp Academic Paper Canvas with Cheerful Framing */
+            /* Vector-Crisp Academic Paper Canvas */
             <div
               style={{
                 transform: `scale(${zoomLevel / 100}) rotate(${rotation}deg)`,
                 transformOrigin: 'top center',
-                transition: 'transform 0.18s cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'transform 0.18s ease-out',
               }}
-              className="w-full max-w-3xl min-h-[1050px] bg-white text-stone-900 rounded-lg shadow-2xl p-10 md:p-14 relative flex flex-col font-sans select-text border border-stone-200"
+              className="w-full max-w-3xl min-h-[1050px] bg-white text-stone-900 rounded-sm shadow-md p-10 md:p-14 relative flex flex-col font-sans select-text border border-stone-300"
             >
-              {/* Paper Watermark / Seal */}
-              <div className="absolute right-10 top-10 opacity-5 pointer-events-none select-none">
-                <BookOpen className="w-48 h-48 text-amber-600" />
-              </div>
-
-              {/* Official Academic Paper Letterhead / Header with Sunny Seal */}
+              {/* Official Academic Letterhead */}
               <header className="border-b-2 border-stone-900 pb-4 mb-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -539,12 +509,12 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
                       PROGRAM PENDIDIKAN PROFESI GURU (PPG) PRAJABATAN
                     </p>
                     <p className="text-[11px] text-stone-500">
-                      Mata Kuliah: {selectedTask.course} · Kode Arsip: {selectedTask.code}
+                      Mata Kuliah: {selectedTask.course} · Kode Naskah: {selectedTask.code}
                     </p>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="inline-block px-2.5 py-1 bg-amber-100 border border-amber-300 text-amber-950 text-[10px] font-bold rounded-lg shadow-2xs">
-                      ✓ TERVERIFIKASI DOSEN
+                    <span className="text-[11px] font-mono text-stone-700 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">
+                      Naskah Disetujui
                     </span>
                     <p className="text-[10px] font-mono text-stone-400 mt-1">
                       {selectedTask.date}
@@ -555,8 +525,8 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
 
               {/* Document Title (Main Paper Heading) */}
               <div className="mb-6">
-                <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block mb-1">
-                  Kategori Tugas: {selectedTask.category}
+                <span className="text-[11px] font-medium text-stone-500 uppercase tracking-wider block mb-1">
+                  Kategori: {selectedTask.category}
                 </span>
                 <h1 className="text-xl md:text-2xl font-bold font-serif-title leading-snug text-stone-900 mb-2">
                   {highlightSearchText(selectedTask.title)}
@@ -567,12 +537,12 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
                 </div>
               </div>
 
-              {/* Page Sub-Header with Cheerful Accent */}
-              <div className="bg-amber-50/70 border border-amber-200 rounded-xl px-4 py-2 mb-6 flex items-center justify-between text-xs text-stone-700">
-                <span className="font-bold text-stone-900">
+              {/* Page Sub-Header */}
+              <div className="bg-stone-50 border border-stone-200 rounded px-3 py-1.5 mb-6 flex items-center justify-between text-xs text-stone-700">
+                <span className="font-semibold text-stone-900">
                   {currentPageData.title}
                 </span>
-                <span className="font-mono font-bold text-[11px] text-amber-800">
+                <span className="font-mono text-[11px] text-stone-500">
                   Halaman {currentPage} dari {selectedTask.pagesCount}
                 </span>
               </div>
@@ -581,7 +551,7 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
               <div className="space-y-6 flex-1 text-sm leading-relaxed text-stone-800">
                 {currentPageData.sections.map((section, idx) => (
                   <article key={idx} className="space-y-2">
-                    <h2 className="text-base font-bold text-stone-900 tracking-tight font-serif-title border-b border-amber-100 pb-1">
+                    <h2 className="text-base font-bold text-stone-900 tracking-tight font-serif-title border-b border-stone-100 pb-1">
                       {highlightSearchText(section.heading)}
                     </h2>
                     
@@ -601,17 +571,17 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
                       )
                     )}
 
-                    {/* Render Scientific Data Table if present */}
+                    {/* Scientific Data Table */}
                     {section.table && (
-                      <div className="my-4 overflow-x-auto border-2 border-stone-200 rounded-xl overflow-hidden shadow-2xs">
+                      <div className="my-4 overflow-x-auto border border-stone-300 rounded-sm">
                         {section.table.caption && (
-                          <div className="bg-amber-100/70 px-3 py-1.5 text-xs font-bold text-amber-950 border-b border-amber-200">
+                          <div className="bg-stone-100 px-3 py-1.5 text-xs font-semibold text-stone-800 border-b border-stone-300">
                             {section.table.caption}
                           </div>
                         )}
                         <table className="w-full text-left text-xs border-collapse">
                           <thead>
-                            <tr className="bg-stone-100 border-b border-stone-200">
+                            <tr className="bg-stone-50 border-b border-stone-300">
                               {section.table.headers.map((header, hIdx) => (
                                 <th key={hIdx} className="p-2.5 font-bold text-stone-800 border-r border-stone-200 last:border-r-0">
                                   {header}
@@ -621,7 +591,7 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
                           </thead>
                           <tbody>
                             {section.table.rows.map((row, rIdx) => (
-                              <tr key={rIdx} className="border-b border-stone-200 last:border-b-0 hover:bg-amber-50/40">
+                              <tr key={rIdx} className="border-b border-stone-200 last:border-b-0 hover:bg-stone-50">
                                 {row.map((cell, cIdx) => (
                                   <td key={cIdx} className="p-2.5 text-stone-700 border-r border-stone-200 last:border-r-0 font-sans">
                                     {cell}
@@ -634,43 +604,43 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
                       </div>
                     )}
 
-                    {/* Render Callout box if present */}
+                    {/* Callout box */}
                     {section.callout && (
-                      <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-500 rounded-r-xl p-3.5 text-xs text-amber-950 italic my-3 shadow-2xs">
+                      <div className="bg-stone-50 border-l-2 border-stone-700 rounded-r p-3.5 text-xs text-stone-800 italic my-3">
                         {section.callout}
                       </div>
                     )}
                   </article>
                 ))}
 
-                {/* On Last Page: Lecturer Assessment & Stamp Box */}
+                {/* Last Page: Verification Block */}
                 {currentPage === selectedTask.pagesCount && (
                   <div className="mt-10 pt-6 border-t-2 border-stone-200 flex items-end justify-between text-xs">
                     <div>
-                      <p className="text-stone-500 mb-1 font-medium">Catatan Verifikator Dosen:</p>
+                      <p className="text-stone-500 mb-1">Catatan Evaluator Dosen:</p>
                       <p className="italic text-stone-700 max-w-sm">
                         "Kajian ilmiah komprehensif, penyajian data empiris sangat baik, dan alur diferensiasi sangat aplikatif untuk Kurikulum Merdeka."
                       </p>
-                      <p className="font-bold text-teal-800 mt-2">
-                        {selectedTask.grade} · LULUS MEMUASKAN
+                      <p className="font-semibold text-stone-900 mt-2">
+                        {selectedTask.grade} · LULUS
                       </p>
                     </div>
                     <div className="text-center">
                       <p className="text-stone-500 text-[11px] mb-8">Bandung, {selectedTask.date}</p>
                       <p className="font-bold underline text-stone-900">{selectedTask.lecturer}</p>
-                      <p className="text-[10px] text-stone-500 font-medium">Dosen Pengampu Mata Kuliah</p>
+                      <p className="text-[10px] text-stone-500">Dosen Pengampu Mata Kuliah</p>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Paper Footer with page numbers and metadata */}
+              {/* Paper Footer */}
               <footer className="mt-10 pt-4 border-t border-stone-200 flex items-center justify-between text-[11px] text-stone-500 select-none">
-                <span>Portofolio Seminar Kependidikan · Tantri Fadhillah, S.Pd.</span>
-                <span className="font-mono font-bold text-stone-800 bg-amber-100 px-2 py-0.5 rounded">
+                <span>Seminar Kependidikan · Tantri Fadhillah, S.Pd.</span>
+                <span className="font-mono text-stone-700 font-medium">
                   Halaman {currentPage}
                 </span>
-                <span>Dokumen Akademik PPG UPI</span>
+                <span>PPG Prajabatan UPI</span>
               </footer>
             </div>
           )}

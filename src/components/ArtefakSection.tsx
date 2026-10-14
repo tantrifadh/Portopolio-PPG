@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { 
   FileText, 
-  Layers, 
   Download, 
-  ExternalLink, 
   Eye, 
-  CheckCircle, 
-  BookOpen, 
-  FolderDown,
-  Sparkles,
+  Check, 
   X
 } from 'lucide-react';
 import { ArtifactItem } from '../types/portfolio';
@@ -53,22 +48,21 @@ export const ArtefakSection: React.FC = () => {
     <div className="space-y-12">
       
       {/* Header */}
-      <div className="border-b border-amber-200 pb-6">
-        <span className="text-xs font-bold text-emerald-800 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
-          <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-          Perangkat Ajar & Inovasi Media
+      <div className="border-b border-stone-200 pb-6">
+        <span className="text-xs font-medium text-stone-500 uppercase tracking-wider block">
+          Perangkat Ajar & Desain Pembelajaran
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 mt-2">
           Artefak Pembelajaran
         </h1>
-        <p className="text-sm sm:text-base text-stone-700 mt-2 max-w-3xl leading-relaxed">
-          Kumpulan perangkat ajar kurikulum merdeka: mulai dari modul ajar berdiferensiasi, lembar kerja siswa (LKPD) berbasis masalah, hingga media interaktif digital terintegrasi TPACK.
+        <p className="text-sm sm:text-base text-stone-600 mt-2 max-w-3xl leading-relaxed">
+          Kumpulan perangkat ajar Kurikulum Merdeka yang dikembangkan secara bertahap: modul ajar berdiferensiasi, lembar kerja peserta didik kontekstual, hingga media pembelajaran digital berbasis TPACK.
         </p>
       </div>
 
-      {/* Featured Banner with Cheerful Border */}
-      <div className="bg-white border-2 border-amber-200 rounded-3xl overflow-hidden shadow-md grid grid-cols-1 md:grid-cols-12 items-center">
-        <div className="md:col-span-5 h-64 md:h-full min-h-[240px]">
+      {/* Overview Feature Card */}
+      <div className="bg-white border border-stone-200 rounded-xl overflow-hidden grid grid-cols-1 md:grid-cols-12 items-center">
+        <div className="md:col-span-5 h-60 md:h-full min-h-[220px]">
           <img
             src={artifactsImage}
             alt="Perangkat ajar dan modul kurikulum"
@@ -76,34 +70,36 @@ export const ArtefakSection: React.FC = () => {
             referrerPolicy="no-referrer"
           />
         </div>
-        <div className="md:col-span-7 p-7 sm:p-9 space-y-3 bg-gradient-to-br from-white via-amber-50/40 to-orange-50/30">
-          <span className="text-xs font-bold text-amber-900 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full shadow-2xs">
-            ✨ Desain Instruksional ADDIE Model
+        <div className="md:col-span-7 p-6 sm:p-8 space-y-3">
+          <span className="text-xs font-mono text-stone-500 uppercase tracking-wider">
+            Desain Instruksional ADDIE
           </span>
           <h2 className="text-xl sm:text-2xl font-bold font-serif-title text-stone-900 leading-snug">
-            Standar Perancangan Modul Ajar Berdiferensiasi
+            Pengembangan Perangkat Ajar Teruji Lapangan
           </h2>
-          <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
-            Setiap artefak disusun dengan mempertimbangkan profil modalitas belajar siswa (visual, auditori, kinestetik), pemetaan kesiapan belajar kognitif, serta asesmen autentik yang adil.
+          <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+            Setiap dokumen dirancang dengan memetakan kebutuhan belajar siswa (kesiapan kognitif dan gaya belajar), serta menyediakan jalur diferensiasi konten, proses, dan produk yang aplikatif.
           </p>
-          <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-stone-700 pt-2 border-t border-amber-200/80">
-            <span className="flex items-center gap-1 text-emerald-700 font-bold">✓ Kurikulum Merdeka</span>
-            <span className="flex items-center gap-1 text-orange-700 font-bold">✓ Berpusat pada Murid</span>
-            <span className="flex items-center gap-1 text-teal-700 font-bold">✓ Validasi Guru Pamong</span>
+          <div className="flex flex-wrap items-center gap-4 text-xs text-stone-500 pt-2 border-t border-stone-100 font-mono">
+            <span>Kurikulum Merdeka</span>
+            <span aria-hidden="true">·</span>
+            <span>Uji Coba Kelas Nyata</span>
+            <span aria-hidden="true">·</span>
+            <span>Telaah Guru Pamong</span>
           </div>
         </div>
       </div>
 
-      {/* Interactive Cheerful Category Filter Buttons */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2">
+      {/* Filter Tabs */}
+      <div className="flex items-center gap-1.5 p-1 bg-stone-100 rounded-lg w-fit max-w-full overflow-x-auto">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setFilterType(cat)}
-            className={`px-4 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               filterType === cat
-                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-sm scale-102'
-                : 'bg-white text-stone-700 border-2 border-stone-200 hover:border-amber-300 hover:bg-amber-50'
+                ? 'bg-white text-stone-900 shadow-2xs font-semibold'
+                : 'text-stone-600 hover:text-stone-900'
             }`}
           >
             {cat}
@@ -116,16 +112,16 @@ export const ArtefakSection: React.FC = () => {
         {filteredArtifacts.map((artifact) => (
           <div
             key={artifact.id}
-            className="bg-white border-2 border-stone-200/90 rounded-2xl p-6 flex flex-col justify-between hover:border-amber-400 hover:shadow-lg transition-all space-y-4"
+            className="bg-white border border-stone-200 rounded-xl p-6 flex flex-col justify-between hover:border-stone-300 transition-colors space-y-4"
           >
             <div className="space-y-3">
-              <div className="flex items-center justify-between gap-2 text-xs">
-                <span className="font-bold text-amber-950 bg-amber-100 border border-amber-300 px-3 py-0.5 rounded-full">
+              <div className="flex items-center justify-between gap-2 text-xs text-stone-500">
+                <span className="font-medium text-stone-800">
                   {artifact.type}
                 </span>
-                <div className="flex items-center gap-2 text-stone-500 font-medium">
+                <div className="flex items-center gap-2">
                   <span>{artifact.gradeLevel}</span>
-                  <span aria-hidden="true" className="text-stone-300">·</span>
+                  <span aria-hidden="true">·</span>
                   <span>{artifact.pages} Hlm</span>
                 </div>
               </div>
@@ -140,13 +136,13 @@ export const ArtefakSection: React.FC = () => {
 
               {/* Competencies */}
               <div className="pt-2">
-                <p className="text-[11px] font-bold text-stone-600 uppercase tracking-wide mb-1.5">
+                <p className="text-[11px] font-medium text-stone-500 uppercase tracking-wide mb-1.5">
                   Capaian Pembelajaran:
                 </p>
-                <ul className="space-y-1.5 text-xs text-stone-700">
+                <ul className="space-y-1.5 text-xs text-stone-600">
                   {artifact.competencies.map((comp, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span className="text-stone-400 font-mono text-[11px] shrink-0">0{idx + 1}.</span>
                       <span>{comp}</span>
                     </li>
                   ))}
@@ -158,18 +154,18 @@ export const ArtefakSection: React.FC = () => {
             <div className="pt-4 border-t border-stone-100 flex items-center justify-between gap-3 text-xs">
               <button
                 onClick={() => setActiveArtifactModal(artifact)}
-                className="inline-flex items-center gap-1.5 text-amber-800 hover:text-orange-700 font-bold transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-stone-800 hover:text-stone-950 font-medium cursor-pointer"
               >
-                <Eye className="w-4 h-4 text-amber-600" />
+                <Eye className="w-3.5 h-3.5 text-stone-500" />
                 <span>Pratinjau Dokumen</span>
               </button>
 
               <button
                 onClick={() => handleDownloadArtifact(artifact)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-950 rounded-xl font-bold transition-colors border border-amber-200 cursor-pointer"
+                className="inline-flex items-center gap-1 px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded font-medium transition-colors border border-stone-200/60 cursor-pointer"
                 title="Unduh ringkasan dokumen perangkat"
               >
-                <Download className="w-3.5 h-3.5 text-amber-700" />
+                <Download className="w-3.5 h-3.5 text-stone-600" />
                 <span>Unduh ({artifact.fileSize})</span>
               </button>
             </div>
@@ -179,23 +175,23 @@ export const ArtefakSection: React.FC = () => {
 
       {/* Artifact Preview Modal */}
       {activeArtifactModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border-2 border-amber-300 shadow-2xl p-6 sm:p-8 space-y-6 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 backdrop-blur-xs animate-in fade-in duration-150">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-stone-300 shadow-xl p-6 sm:p-8 space-y-6 relative">
             <button
               onClick={() => setActiveArtifactModal(null)}
-              className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-800 rounded-full hover:bg-amber-100 transition-colors cursor-pointer"
+              className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-800 rounded-lg hover:bg-stone-100 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="space-y-2">
-              <span className="text-xs font-bold text-amber-950 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">
+              <div className="text-xs text-stone-500 font-mono">
                 {activeArtifactModal.type} · {activeArtifactModal.curriculum}
-              </span>
+              </div>
               <h3 className="text-xl sm:text-2xl font-bold font-serif-title text-stone-900 leading-snug">
                 {activeArtifactModal.title}
               </h3>
-              <div className="flex items-center gap-3 text-xs text-stone-500 pt-1 font-medium">
+              <div className="flex items-center gap-3 text-xs text-stone-500 pt-1">
                 <span>Sasaran: {activeArtifactModal.gradeLevel}</span>
                 <span aria-hidden="true">·</span>
                 <span>Jumlah: {activeArtifactModal.pages} Halaman</span>
@@ -205,25 +201,23 @@ export const ArtefakSection: React.FC = () => {
             </div>
 
             <div className="space-y-4 text-xs sm:text-sm text-stone-700">
-              <div className="bg-amber-50/70 border-2 border-amber-200 rounded-2xl p-5 space-y-2">
-                <h4 className="font-bold text-amber-950 text-xs uppercase tracking-wider">
-                  Cuplikan Lembar Kerja / Skenario:
+              <div className="bg-stone-50 border border-stone-200 rounded-lg p-4 space-y-1.5">
+                <h4 className="font-semibold text-stone-900 text-xs uppercase tracking-wider">
+                  Cuplikan Skenario / Lembar Kerja:
                 </h4>
-                <p className="italic text-stone-700 leading-relaxed font-sans">
+                <p className="italic text-stone-600 leading-relaxed font-sans">
                   "{activeArtifactModal.previewSnippet}"
                 </p>
               </div>
 
               <div>
-                <h4 className="font-bold text-stone-900 text-xs uppercase tracking-wider mb-2">
-                  Target Capaian & Karakter Pelajar Pancasila:
+                <h4 className="font-semibold text-stone-900 text-xs uppercase tracking-wider mb-2">
+                  Target Capaian Pembelajaran:
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5">
                   {activeArtifactModal.competencies.map((comp, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 text-stone-700">
-                      <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
-                        ✓
-                      </span>
+                    <li key={idx} className="flex items-start gap-2 text-stone-700">
+                      <Check className="w-3.5 h-3.5 text-stone-600 shrink-0 mt-0.5" />
                       <span>{comp}</span>
                     </li>
                   ))}
@@ -231,7 +225,7 @@ export const ArtefakSection: React.FC = () => {
               </div>
 
               <div>
-                <h4 className="font-bold text-stone-900 text-xs uppercase tracking-wider mb-1">
+                <h4 className="font-semibold text-stone-900 text-xs uppercase tracking-wider mb-1">
                   Deskripsi Perancangan:
                 </h4>
                 <p className="text-stone-600 leading-relaxed">
@@ -243,13 +237,13 @@ export const ArtefakSection: React.FC = () => {
             <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-3">
               <button
                 onClick={() => setActiveArtifactModal(null)}
-                className="px-4 py-2 text-xs font-bold text-stone-700 hover:bg-stone-100 rounded-xl transition-colors cursor-pointer"
+                className="px-4 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100 rounded-lg transition-colors cursor-pointer"
               >
                 Tutup
               </button>
               <button
                 onClick={() => handleDownloadArtifact(activeArtifactModal)}
-                className="px-5 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 rounded-xl transition-all inline-flex items-center gap-2 shadow-xs cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold text-white bg-stone-900 hover:bg-stone-800 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Unduh Berkas Lengkap</span>

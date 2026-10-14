@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { 
-  BookOpen, 
   Clock, 
   Calendar, 
   Heart, 
@@ -9,7 +8,6 @@ import {
   Search, 
   ArrowLeft, 
   Send,
-  Sparkles,
   Check
 } from 'lucide-react';
 import { BlogPost } from '../types/portfolio';
@@ -44,13 +42,13 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
         author: 'Rina S., S.Pd.',
         role: 'Guru Biologi SMA',
         date: '29 Mei 2024',
-        text: 'Sangat menginspirasi Bu Tantri! Konsep paspor belajar di awal semester akan saya adaptasikan di kelas saya semester depan.'
+        text: 'Konsep paspor belajar di awal semester sangat relevan. Saya akan mencoba menerapkannya pada materi sistem organ.'
       },
       {
         author: 'Bambang Prasetyo',
         role: 'Mahasiswa PPG Prajabatan',
         date: '31 Mei 2024',
-        text: 'Penjelasan diferensiasi produk sangat jelas, seringkali guru pemula seperti kami bingung antara diferensiasi dan membuat banyak RPP.'
+        text: 'Penjelasan diferensiasi produk sangat membantu memperjelas bahwa guru tidak perlu menyusun 36 RPP berbeda.'
       }
     ],
     'blog-02': [
@@ -58,7 +56,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
         author: 'Dra. Hj. Wahyuni, M.Pd.',
         role: 'Dosen Pembimbing Lapangan',
         date: '14 April 2024',
-        text: 'Refleksi yang sangat jujur dan menyentuh. Kemampuan adaptasi saat rencana ajar menemui kendala adalah tanda kematangan seorang pendidik sejati.'
+        text: 'Refleksi yang sangat jujur. Fleksibilitas saat rencana awal menemui kendala justru membuktikan kematangan pedagogis guru.'
       }
     ]
   });
@@ -121,30 +119,22 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
       
       {/* If viewing a single post */}
       {selectedPost ? (
-        <article className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-200">
+        <article className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-150">
           <button
             onClick={() => setSelectedPost(null)}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-3 py-1.5 rounded-xl transition-all cursor-pointer shadow-2xs"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-stone-600 hover:text-stone-900 transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-4 h-4 text-amber-800" />
-            <span>Kembali ke Daftar Tulisan Blog</span>
+            <ArrowLeft className="w-4 h-4" />
+            <span>Kembali ke Semua Artikel</span>
           </button>
 
-          <header className="space-y-4 border-b-2 border-amber-200 pb-8">
-            <div className="flex items-center gap-2 text-xs">
-              <span className="font-bold text-amber-950 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">
-                {selectedPost.category}
-              </span>
-              <span aria-hidden="true" className="text-stone-300">·</span>
-              <span className="flex items-center gap-1 text-stone-500 font-medium">
-                <Calendar className="w-3.5 h-3.5 text-orange-600" />
-                {selectedPost.date}
-              </span>
-              <span aria-hidden="true" className="text-stone-300">·</span>
-              <span className="flex items-center gap-1 text-stone-500 font-medium">
-                <Clock className="w-3.5 h-3.5 text-teal-600" />
-                {selectedPost.readTime}
-              </span>
+          <header className="space-y-4 border-b border-stone-200 pb-8">
+            <div className="flex items-center gap-2 text-xs text-stone-500">
+              <span className="font-medium text-stone-800">{selectedPost.category}</span>
+              <span aria-hidden="true">·</span>
+              <span>{selectedPost.date}</span>
+              <span aria-hidden="true">·</span>
+              <span>{selectedPost.readTime}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 leading-tight">
@@ -153,35 +143,35 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
 
             <div className="flex items-center justify-between pt-2">
               <p className="text-xs text-stone-600">
-                Ditulis oleh: <strong className="text-stone-900">Tantri Fadhillah, S.Pd.</strong>
+                Oleh: <strong className="text-stone-900 font-semibold">Tantri Fadhillah, S.Pd.</strong>
               </p>
               
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleLike(selectedPost.id)}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold border-2 transition-all cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs font-medium transition-colors cursor-pointer ${
                     hasLikedMap[selectedPost.id]
-                      ? 'bg-rose-100 border-rose-300 text-rose-800 shadow-xs'
-                      : 'bg-white border-stone-200 text-stone-700 hover:text-rose-600 hover:border-rose-300'
+                      ? 'bg-stone-900 text-white border-stone-900'
+                      : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
                   }`}
                 >
-                  <Heart className={`w-3.5 h-3.5 ${hasLikedMap[selectedPost.id] ? 'fill-current text-rose-600' : 'text-stone-400'}`} />
+                  <Heart className={`w-3.5 h-3.5 ${hasLikedMap[selectedPost.id] ? 'fill-current text-white' : ''}`} />
                   <span>{likesMap[selectedPost.id] || selectedPost.likes} Apresiasi</span>
                 </button>
 
                 <button
                   onClick={() => handleShare(selectedPost)}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold border-2 border-stone-200 bg-white text-stone-700 hover:text-stone-900 hover:border-amber-300 transition-all cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 transition-colors cursor-pointer text-xs font-medium"
                 >
-                  {copiedShare ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5 text-amber-600" />}
-                  <span>{copiedShare ? 'Tautan Disalin!' : 'Bagikan'}</span>
+                  {copiedShare ? <Check className="w-3.5 h-3.5 text-stone-900" /> : <Share2 className="w-3.5 h-3.5" />}
+                  <span>{copiedShare ? 'Tersalin' : 'Bagikan'}</span>
                 </button>
               </div>
             </div>
           </header>
 
           {/* Article Prose Content */}
-          <div className="space-y-6 text-stone-800 leading-relaxed text-sm sm:text-base font-sans">
+          <div className="space-y-6 text-stone-800 leading-relaxed text-base font-sans">
             {selectedPost.content.map((paragraph, idx) => (
               <p key={idx} className="leading-relaxed text-justify text-stone-700">
                 {paragraph}
@@ -190,62 +180,62 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
           </div>
 
           {/* Tags */}
-          <div className="pt-6 border-t border-amber-200 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold text-stone-700">Topik Terkait:</span>
+          <div className="pt-6 border-t border-stone-200 flex flex-wrap items-center gap-2">
+            <span className="text-xs font-medium text-stone-500">Topik:</span>
             {selectedPost.tags.map((tag, idx) => (
-              <span key={idx} className="text-xs bg-amber-50 border border-amber-200 text-amber-950 font-semibold px-3 py-1 rounded-full">
+              <span key={idx} className="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded">
                 #{tag}
               </span>
             ))}
           </div>
 
-          {/* Comments & Discussion Section with Cheerful Atmosphere */}
-          <section className="pt-10 border-t-2 border-amber-200 space-y-6">
+          {/* Comments & Discussion Section */}
+          <section className="pt-10 border-t border-stone-200 space-y-6">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold font-serif-title text-stone-900 flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-amber-600" />
-                <span>Ruang Diskusi & Umpan Balik Guru ({(commentsMap[selectedPost.id] || []).length})</span>
+                <MessageSquare className="w-4 h-4 text-stone-700" />
+                <span>Ruang Diskusi ({(commentsMap[selectedPost.id] || []).length})</span>
               </h3>
             </div>
 
             {/* Comment Form */}
             <form 
               onSubmit={(e) => handleAddComment(selectedPost.id, e)}
-              className="bg-amber-50/50 border-2 border-amber-200 rounded-3xl p-6 space-y-3 shadow-xs"
+              className="bg-stone-50 border border-stone-200 rounded-xl p-5 space-y-3"
             >
-              <p className="text-xs font-bold text-amber-950">Tinggalkan Tanggapan atau Refleksi Rekan Guru:</p>
+              <p className="text-xs font-medium text-stone-700">Tinggalkan tanggapan atau pengalaman Anda:</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <input
                   type="text"
-                  placeholder="Nama Lengkap Anda"
+                  placeholder="Nama Lengkap"
                   value={newCommentName}
                   onChange={(e) => setNewCommentName(e.target.value)}
                   required
-                  className="px-3.5 py-2.5 bg-white border-2 border-stone-200 rounded-xl text-xs text-stone-800 focus:outline-none focus:border-amber-500"
+                  className="px-3 py-2 bg-white border border-stone-200 rounded text-xs text-stone-800 focus:outline-none focus:border-stone-400"
                 />
                 <input
                   type="text"
-                  placeholder="Peran / Asal Instansi (opsional)"
+                  placeholder="Peran / Instansi (opsional)"
                   value={newCommentRole}
                   onChange={(e) => setNewCommentRole(e.target.value)}
-                  className="px-3.5 py-2.5 bg-white border-2 border-stone-200 rounded-xl text-xs text-stone-800 focus:outline-none focus:border-amber-500"
+                  className="px-3 py-2 bg-white border border-stone-200 rounded text-xs text-stone-800 focus:outline-none focus:border-stone-400"
                 />
               </div>
 
               <textarea
-                placeholder="Tuliskan gagasan, pertanyaan, atau refleksi pembelajaran Anda di sini..."
+                placeholder="Tuliskan gagasan atau pertanyaan Anda di sini..."
                 value={newCommentText}
                 onChange={(e) => setNewCommentText(e.target.value)}
                 required
                 rows={3}
-                className="w-full px-3.5 py-2.5 bg-white border-2 border-stone-200 rounded-xl text-xs text-stone-800 focus:outline-none focus:border-amber-500 resize-none"
+                className="w-full px-3 py-2 bg-white border border-stone-200 rounded text-xs text-stone-800 focus:outline-none focus:border-stone-400 resize-none"
               />
 
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded text-xs font-medium transition-colors cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Kirim Tanggapan</span>
@@ -256,13 +246,13 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
             {/* Existing Comments List */}
             <div className="space-y-3">
               {(commentsMap[selectedPost.id] || []).map((comment, cIdx) => (
-                <div key={cIdx} className="bg-white border-2 border-stone-200/90 rounded-2xl p-5 space-y-1.5 shadow-2xs">
+                <div key={cIdx} className="bg-white border border-stone-200 rounded-xl p-4 space-y-1">
                   <div className="flex items-center justify-between text-xs">
                     <div>
                       <strong className="text-stone-900">{comment.author}</strong>
-                      <span className="text-stone-500 text-[11px] ml-1.5 font-medium">({comment.role})</span>
+                      <span className="text-stone-500 text-[11px] ml-1.5 font-mono">({comment.role})</span>
                     </div>
-                    <span className="text-stone-400 text-[11px]">{comment.date}</span>
+                    <span className="text-stone-400 text-[11px] font-mono">{comment.date}</span>
                   </div>
                   <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
                     {comment.text}
@@ -274,20 +264,19 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
 
         </article>
       ) : (
-        /* Blog Index View with Cheerful Cards */
+        /* Blog Index View */
         <div className="space-y-10">
           
           {/* Header */}
-          <div className="border-b border-amber-200 pb-6">
-            <span className="text-xs font-bold text-rose-800 bg-rose-100/90 border border-rose-300 px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-rose-600" />
-              Catatan Pedagogis & Refleksi Hati
+          <div className="border-b border-stone-200 pb-6">
+            <span className="text-xs font-medium text-stone-500 uppercase tracking-wider block">
+              Catatan & Esai Pembelajaran
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 mt-2">
               Blog Pendidikan
             </h1>
-            <p className="text-sm sm:text-base text-stone-700 mt-2 max-w-3xl leading-relaxed">
-              Kumpulan esai reflektif mengenai dinamika pembelajaran berdiferensiasi, kisah nyata dari ruang kelas PPL, serta perenungan filosofis menjaga sentuhan kemanusiaan guru di era teknologi modern.
+            <p className="text-sm sm:text-base text-stone-600 mt-2 max-w-3xl leading-relaxed">
+              Kumpulan esai reflektif mengenai dinamika pembelajaran berdiferensiasi, catatan lapangan PPL, serta telaah etis peran guru di tengah perkembangan teknologi.
             </p>
           </div>
 
@@ -295,26 +284,26 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             {/* Search Box */}
             <div className="relative flex-1 max-w-md">
-              <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Cari judul artikel atau kata kunci..."
+                placeholder="Cari artikel atau kata kunci..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-white border-2 border-stone-200 rounded-2xl text-xs text-stone-800 placeholder-stone-400 focus:outline-none focus:border-amber-500 shadow-2xs"
+                className="w-full pl-9 pr-4 py-2 bg-white border border-stone-200 rounded-lg text-xs text-stone-800 placeholder-stone-400 focus:outline-none focus:border-stone-400"
               />
             </div>
 
             {/* Tag Buttons */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
               {allTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => setSelectedTag(tag)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                     selectedTag === tag
-                      ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-xs'
-                      : 'bg-white text-stone-700 border-2 border-stone-200 hover:border-amber-300 hover:bg-amber-50'
+                      ? 'bg-stone-900 text-white'
+                      : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 hover:text-stone-900'
                   }`}
                 >
                   {tag}
@@ -323,24 +312,22 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
             </div>
           </div>
 
-          {/* Posts Grid with Cheerful Framing */}
+          {/* Posts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {filteredPosts.map((post) => (
               <article
                 key={post.id}
                 onClick={() => setSelectedPost(post)}
-                className="bg-white border-2 border-stone-200/90 rounded-3xl p-6 flex flex-col justify-between hover:border-amber-400 hover:shadow-xl transition-all cursor-pointer group"
+                className="bg-white border border-stone-200 rounded-xl p-6 flex flex-col justify-between hover:border-stone-400 transition-colors cursor-pointer group"
               >
                 <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-xs">
-                    <span className="font-bold text-amber-950 bg-amber-100 border border-amber-300 px-3 py-0.5 rounded-full">
-                      {post.category}
-                    </span>
-                    <span aria-hidden="true" className="text-stone-300">·</span>
-                    <span className="text-stone-500 font-medium">{post.readTime}</span>
+                  <div className="flex items-center gap-2 text-xs text-stone-500">
+                    <span className="font-medium text-stone-800">{post.category}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{post.readTime}</span>
                   </div>
 
-                  <h2 className="text-lg font-bold font-serif-title text-stone-900 group-hover:text-amber-800 transition-colors leading-snug">
+                  <h2 className="text-lg font-bold font-serif-title text-stone-900 group-hover:text-stone-700 transition-colors leading-snug">
                     {post.title}
                   </h2>
 
@@ -353,10 +340,10 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ initialPostId }) => {
                   <span>{post.date}</span>
                   <div className="flex items-center gap-3">
                     <span className="flex items-center gap-1 text-stone-400">
-                      <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-100" />
+                      <Heart className="w-3.5 h-3.5" />
                       {likesMap[post.id] || post.likes}
                     </span>
-                    <span className="text-amber-800 font-bold group-hover:text-orange-700 group-hover:underline">
+                    <span className="text-stone-900 font-medium group-hover:underline">
                       Baca →
                     </span>
                   </div>
