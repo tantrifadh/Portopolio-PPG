@@ -56,7 +56,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="bg-white rounded-xl max-w-lg w-full border border-stone-300 shadow-xl overflow-hidden relative">
+      <div className="bg-white rounded-2xl max-w-lg w-full border border-stone-300 shadow-2xl overflow-hidden relative">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-800 rounded-lg hover:bg-stone-100 transition-colors cursor-pointer"
@@ -66,38 +66,38 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
 
         <div className="p-6 sm:p-8 space-y-6">
           <div className="space-y-1">
-            <span className="text-xs font-mono text-stone-500 uppercase tracking-wider block">
-              Komunikasi & Kemitraan
+            <span className="text-xs font-mono uppercase tracking-widest text-stone-500 block">
+              Komunikasi & Kemitraan Guru
             </span>
             <h3 className="text-xl sm:text-2xl font-bold font-serif-title text-stone-900 mt-1">
               Hubungi {EDUCATOR_INFO.name}
             </h3>
-            <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
-              Terbuka untuk diskusi implementasi Kurikulum Merdeka, narasumber lokakarya pembelajaran berdiferensiasi, maupun riset tindakan kelas.
+            <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-sans">
+              Terbuka untuk kolaborasi Kurikulum Merdeka, narasumber pembelajaran berdiferensiasi, maupun riset tindakan kelas sains.
             </p>
           </div>
 
           {formSubmitted ? (
-            <div className="p-6 bg-stone-50 border border-stone-200 rounded-lg text-center space-y-3">
-              <div className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center mx-auto">
+            <div className="p-6 bg-stone-50 border border-stone-200 rounded-xl text-center space-y-3">
+              <div className="w-9 h-9 rounded-full bg-stone-900 text-white flex items-center justify-center mx-auto shadow-2xs">
                 <Check className="w-4 h-4" />
               </div>
               <h4 className="font-semibold text-stone-900 text-sm">Pesan Berhasil Terkirim</h4>
               <p className="text-xs text-stone-600 leading-relaxed">
-                Terima kasih atas pesan Anda. Pendidik akan merespons melalui alamat email <strong>{senderEmail}</strong> sesegera mungkin.
+                Terima kasih atas pesan Anda. Pendidik akan merespons melalui alamat surel <strong>{senderEmail}</strong> sesegera mungkin.
               </p>
               <button
                 onClick={() => {
                   setFormSubmitted(false);
                   onClose();
                 }}
-                className="mt-2 px-4 py-2 bg-stone-900 text-white rounded text-xs font-medium cursor-pointer"
+                className="mt-2 px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded-lg text-xs font-medium cursor-pointer transition-colors shadow-2xs"
               >
-                Tutup
+                Tutup Jendela
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs font-sans">
               <div>
                 <label className="block font-medium text-stone-700 mb-1">Nama Lengkap</label>
                 <input
@@ -106,19 +106,19 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                   placeholder="Nama Lengkap atau Sekolah/Instansi"
                   value={senderName}
                   onChange={(e) => setSenderName(e.target.value)}
-                  className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded focus:bg-white focus:outline-none focus:border-stone-400 text-stone-900 text-xs"
+                  className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg focus:bg-white focus:outline-none focus:border-stone-400 text-stone-900 text-xs"
                 />
               </div>
 
               <div>
-                <label className="block font-medium text-stone-700 mb-1">Alamat Email</label>
+                <label className="block font-medium text-stone-700 mb-1">Alamat Surel</label>
                 <input
                   type="email"
                   required
                   placeholder="nama@sekolah.sch.id"
                   value={senderEmail}
                   onChange={(e) => setSenderEmail(e.target.value)}
-                  className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded focus:bg-white focus:outline-none focus:border-stone-400 text-stone-900 text-xs"
+                  className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg focus:bg-white focus:outline-none focus:border-stone-400 text-stone-900 text-xs"
                 />
               </div>
 
@@ -127,7 +127,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                 <select
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded focus:bg-white focus:outline-none focus:border-stone-400 text-stone-900 text-xs"
+                  className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg focus:bg-white focus:outline-none focus:border-stone-400 text-stone-900 text-xs"
                 >
                   <option value="Kolaborasi Penelitian Tindakan Kelas (PTK)">Kolaborasi Penelitian Tindakan Kelas (PTK)</option>
                   <option value="Workshop Pembelajaran Berdiferensiasi">Narasumber Pembelajaran Berdiferensiasi</option>
@@ -144,7 +144,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                   placeholder="Tuliskan rencana kegiatan atau pertanyaan Anda..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded focus:bg-white focus:outline-none focus:border-stone-400 text-stone-900 text-xs resize-none"
+                  className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg focus:bg-white focus:outline-none focus:border-stone-400 text-stone-900 text-xs resize-none"
                 />
               </div>
 
@@ -152,7 +152,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                 <button
                   type="button"
                   onClick={handleDownloadCV}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded text-xs font-medium border border-stone-200 transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-xs font-medium border border-stone-200 transition-colors cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5 text-stone-600" />
                   <span>Unduh CV (.txt)</span>
@@ -160,7 +160,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
 
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded text-xs font-semibold transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded-lg text-xs font-semibold transition-all shadow-2xs cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Kirim Pesan</span>

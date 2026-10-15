@@ -4,8 +4,7 @@ export type SectionId =
   | 'artefak'
   | 'penilaian'
   | 'dokumentasi'
-  | 'seminar'
-  | 'blog';
+  | 'seminar';
 
 export interface SeminarTask {
   id: string;

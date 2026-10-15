@@ -80,7 +80,7 @@ export const PenilaianSection: React.FC = () => {
       
       {/* Header */}
       <div className="border-b border-stone-200 pb-6">
-        <span className="text-xs font-medium text-stone-500 uppercase tracking-wider block">
+        <span className="text-xs font-mono uppercase tracking-widest text-stone-500 block">
           Evaluasi Autentik & Rubrik Penilaian
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 mt-2">
@@ -106,7 +106,7 @@ export const PenilaianSection: React.FC = () => {
             }}
             className={`px-3.5 py-2 text-xs font-medium rounded-lg border transition-colors cursor-pointer ${
               selectedRubricIndex === idx
-                ? 'bg-stone-900 border-stone-900 text-white'
+                ? 'bg-stone-900 border-stone-900 text-white shadow-2xs font-semibold'
                 : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
             }`}
           >
@@ -119,10 +119,10 @@ export const PenilaianSection: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* Left: Detailed Criteria */}
-        <div className="lg:col-span-8 bg-white border border-stone-200 rounded-xl p-6 sm:p-8 space-y-6">
+        <div className="lg:col-span-8 bg-white border border-stone-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-2xs">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stone-100 pb-4">
             <div>
-              <span className="text-xs font-mono text-stone-500">
+              <span className="text-xs font-mono text-stone-500 uppercase tracking-wider">
                 Tipe Asesmen: {activeRubric.type}
               </span>
               <h2 className="text-xl font-bold font-serif-title text-stone-900 mt-1">
@@ -168,7 +168,7 @@ export const PenilaianSection: React.FC = () => {
                         onClick={() => handleScoreChange(criteria.name, lvl.score)}
                         className={`text-left p-3 rounded-lg border text-xs transition-colors cursor-pointer ${
                           isSelected
-                            ? 'bg-stone-900 text-white border-stone-900'
+                            ? 'bg-stone-900 text-white border-stone-900 shadow-2xs'
                             : 'bg-white border-stone-200 text-stone-700 hover:border-stone-400'
                         }`}
                       >
@@ -192,7 +192,7 @@ export const PenilaianSection: React.FC = () => {
 
         {/* Right: Clean Interactive Grading Simulator Card */}
         <div className="lg:col-span-4 sticky top-24 space-y-6">
-          <div className="bg-stone-900 text-stone-100 rounded-xl p-6 border border-stone-800 space-y-5">
+          <div className="bg-stone-900 text-stone-100 rounded-xl p-6 border border-stone-800 space-y-5 shadow-sm">
             <div className="flex items-center gap-2 text-xs font-mono text-stone-400 uppercase tracking-wider">
               <Calculator className="w-4 h-4" />
               <span>Simulator Penskoran</span>
@@ -237,7 +237,7 @@ export const PenilaianSection: React.FC = () => {
           </div>
 
           {/* Profil Pelajar Pancasila Info Box */}
-          <div className="bg-white border border-stone-200 rounded-xl p-5 space-y-2">
+          <div className="bg-white border border-stone-200 rounded-xl p-5 space-y-2 shadow-2xs">
             <h4 className="text-xs font-semibold text-stone-900 uppercase tracking-wider">
               Profil Pelajar Pancasila
             </h4>

@@ -214,7 +214,7 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
         isFullscreen ? 'fixed inset-0 z-50 rounded-none border-0' : 'w-full min-h-[780px]'
       }`}
     >
-      {/* Clean Document Reader Toolbar */}
+      {/* Clean Document Reader Toolbar with Elegant Style */}
       <div className="bg-white border-b border-stone-200 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs select-none">
         
         {/* Left: Document Identity & Switcher toggle */}
@@ -227,7 +227,7 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
               <p className="font-semibold text-stone-900 truncate max-w-[200px] sm:max-w-[320px]">
                 {selectedTask.title}
               </p>
-              <div className="flex items-center gap-2 text-[11px] text-stone-500">
+              <div className="flex items-center gap-2 text-[11px] text-stone-500 font-mono">
                 <span>{selectedTask.code}</span>
                 <span aria-hidden="true">·</span>
                 <span>{selectedTask.pagesCount} Halaman</span>
@@ -239,9 +239,9 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialTaskId }) => {
 
           <button
             onClick={() => setShowThumbnails(!showThumbnails)}
-            className={`px-2.5 py-1.5 rounded border text-xs font-medium transition-colors flex items-center gap-1.5 cursor-pointer ${
+            className={`px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-colors flex items-center gap-1.5 cursor-pointer ${
               showThumbnails 
-                ? 'bg-stone-100 border-stone-300 text-stone-900' 
+                ? 'bg-stone-100 border-stone-300 text-stone-900 font-semibold' 
                 : 'bg-white border-stone-200 text-stone-600 hover:text-stone-900 hover:bg-stone-50'
             }`}
             title="Daftar naskah dan halaman"

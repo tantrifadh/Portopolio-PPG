@@ -61,7 +61,7 @@ export const DokumentasiSection: React.FC = () => {
       
       {/* Header */}
       <div className="border-b border-stone-200 pb-6">
-        <span className="text-xs font-medium text-stone-500 uppercase tracking-wider block">
+        <span className="text-xs font-mono uppercase tracking-widest text-stone-500 block">
           Galeri & Dokumentasi Lapangan
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 mt-2">
@@ -78,7 +78,7 @@ export const DokumentasiSection: React.FC = () => {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`px-3.5 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               activeCategory === cat
                 ? 'bg-white text-stone-900 shadow-2xs font-semibold'
                 : 'text-stone-600 hover:text-stone-900'
@@ -95,7 +95,7 @@ export const DokumentasiSection: React.FC = () => {
           <div
             key={photo.id}
             onClick={() => openLightbox(photo.id)}
-            className="group bg-white border border-stone-200 rounded-xl overflow-hidden hover:border-stone-400 transition-colors flex flex-col cursor-pointer"
+            className="group bg-white border border-stone-200 rounded-xl overflow-hidden hover:border-stone-400 transition-colors flex flex-col cursor-pointer shadow-2xs"
           >
             {/* Image Container */}
             <div className="relative aspect-[16/10] overflow-hidden bg-stone-100">

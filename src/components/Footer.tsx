@@ -1,6 +1,6 @@
 import React from 'react';
 import { SectionId } from '../types/portfolio';
-import { Mail, Phone, MapPin, GraduationCap, ArrowUp } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
 import { EDUCATOR_INFO } from '../data/portfolioData';
 
 interface FooterProps {
@@ -22,8 +22,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 1: Identity & Philosophy */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded bg-stone-800 text-stone-200 flex items-center justify-center font-serif font-bold text-xs">
-                T
+              <div className="w-8 h-8 rounded-lg bg-stone-800 text-stone-100 flex items-center justify-center font-serif font-bold text-xs">
+                TF
               </div>
               <span className="font-serif-title text-xl font-bold text-white tracking-wide">
                 {EDUCATOR_INFO.name}
@@ -32,10 +32,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <p className="text-sm text-stone-400 leading-relaxed">
               {EDUCATOR_INFO.subRole} · {EDUCATOR_INFO.institution}
             </p>
-            <blockquote className="text-xs text-stone-400 italic border-l border-stone-700 pl-3 py-1">
+            <blockquote className="text-xs text-stone-300 italic border-l-2 border-stone-600 pl-3 py-1">
               "Ing ngarsa sung tuladha, ing madya mangun karsa, tut wuri handayani."
               <br />
-              <span className="text-[11px] text-stone-500 font-sans not-italic">
+              <span className="text-[11px] text-stone-400 font-sans not-italic font-medium">
                 — Ki Hajar Dewantara, Bapak Pendidikan Nasional
               </span>
             </blockquote>
@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* Col 2: Navigation Links */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-stone-400">
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-stone-400">
               Navigasi Halaman
             </h4>
             <ul className="space-y-2 text-xs">
@@ -73,13 +73,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('seminar')} className="hover:text-white transition-colors cursor-pointer font-medium text-stone-200">
-                  Seminar Kependidikan (Tugas PDF)
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('blog')} className="hover:text-white transition-colors cursor-pointer">
-                  Blog & Esai Pembelajaran
+                <button onClick={() => onNavigate('seminar')} className="hover:text-white transition-colors cursor-pointer font-medium text-stone-200 flex items-center gap-1.5">
+                  <span>Seminar Kependidikan</span>
+                  <span className="text-[10px] font-mono bg-stone-800 text-stone-300 px-1.5 py-0.5 rounded border border-stone-700">PDF</span>
                 </button>
               </li>
             </ul>
@@ -87,25 +83,25 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* Col 3: Contact Details */}
           <div className="md:col-span-4 space-y-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-stone-400">
-              Kontak
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-stone-400">
+              Kontak Pendidik
             </h4>
-            <div className="space-y-2 text-xs text-stone-400">
-              <div className="flex items-center gap-2">
+            <div className="space-y-2.5 text-xs text-stone-400">
+              <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-stone-400 shrink-0" />
                 <span>{EDUCATOR_INFO.email}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-stone-400 shrink-0" />
                 <span>{EDUCATOR_INFO.phone}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <MapPin className="w-4 h-4 text-stone-400 shrink-0" />
                 <span>{EDUCATOR_INFO.location}</span>
               </div>
             </div>
             <p className="text-[11px] text-stone-500 pt-1">
-              Terbuka untuk kemitraan riset tindakan kelas dan telaah kurikulum sains.
+              Terbuka untuk kemitraan riset tindakan kelas, telaah modul ajar, dan lokakarya pembelajaran sains berdiferensiasi.
             </p>
           </div>
         </div>
@@ -113,12 +109,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
           <p>
-            © {new Date().getFullYear()} {EDUCATOR_INFO.name}. Portofolio Akademik & Pendidik.
+            © {new Date().getFullYear()} {EDUCATOR_INFO.name}. Seluruh hak cipta karya akademik dilindungi.
           </p>
           <div className="flex items-center gap-4">
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1.5 hover:text-stone-300 transition-colors text-xs cursor-pointer"
+              className="flex items-center gap-1.5 text-stone-400 hover:text-white font-medium transition-colors text-xs cursor-pointer"
             >
               <span>Kembali ke Atas</span>
               <ArrowUp className="w-3.5 h-3.5" />

@@ -7,7 +7,7 @@ import {
   X
 } from 'lucide-react';
 import { ArtifactItem } from '../types/portfolio';
-import { ARTIFACTS_LIST, artifactsImage } from '../data/portfolioData';
+import { ARTIFACTS_LIST } from '../data/portfolioData';
 
 export const ArtefakSection: React.FC = () => {
   const [filterType, setFilterType] = useState<string>('Semua');
@@ -49,7 +49,7 @@ export const ArtefakSection: React.FC = () => {
       
       {/* Header */}
       <div className="border-b border-stone-200 pb-6">
-        <span className="text-xs font-medium text-stone-500 uppercase tracking-wider block">
+        <span className="text-xs font-mono uppercase tracking-widest text-stone-500 block">
           Perangkat Ajar & Desain Pembelajaran
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold font-serif-title text-stone-900 mt-2">
@@ -60,33 +60,23 @@ export const ArtefakSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Overview Feature Card */}
-      <div className="bg-white border border-stone-200 rounded-xl overflow-hidden grid grid-cols-1 md:grid-cols-12 items-center">
-        <div className="md:col-span-5 h-60 md:h-full min-h-[220px]">
-          <img
-            src={artifactsImage}
-            alt="Perangkat ajar dan modul kurikulum"
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <div className="md:col-span-7 p-6 sm:p-8 space-y-3">
-          <span className="text-xs font-mono text-stone-500 uppercase tracking-wider">
-            Desain Instruksional ADDIE
-          </span>
-          <h2 className="text-xl sm:text-2xl font-bold font-serif-title text-stone-900 leading-snug">
-            Pengembangan Perangkat Ajar Teruji Lapangan
-          </h2>
-          <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
-            Setiap dokumen dirancang dengan memetakan kebutuhan belajar siswa (kesiapan kognitif dan gaya belajar), serta menyediakan jalur diferensiasi konten, proses, dan produk yang aplikatif.
-          </p>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-stone-500 pt-2 border-t border-stone-100 font-mono">
-            <span>Kurikulum Merdeka</span>
-            <span aria-hidden="true">·</span>
-            <span>Uji Coba Kelas Nyata</span>
-            <span aria-hidden="true">·</span>
-            <span>Telaah Guru Pamong</span>
-          </div>
+      {/* Overview Feature Card (Tanpa Foto) */}
+      <div className="bg-white border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-3 shadow-2xs">
+        <span className="text-xs font-mono uppercase tracking-widest text-stone-500 block">
+          Desain Instruksional ADDIE
+        </span>
+        <h2 className="text-xl sm:text-2xl font-bold font-serif-title text-stone-900 leading-snug">
+          Pengembangan Perangkat Ajar Teruji Lapangan
+        </h2>
+        <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-3xl">
+          Setiap dokumen dirancang dengan memetakan kebutuhan belajar siswa (kesiapan kognitif dan profil belajar), serta menyediakan alur diferensiasi konten, proses, dan produk yang aplikatif di ruang kelas.
+        </p>
+        <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-stone-500 pt-2 border-t border-stone-100">
+          <span>Kurikulum Merdeka</span>
+          <span aria-hidden="true">·</span>
+          <span>Uji Coba Kelas Nyata</span>
+          <span aria-hidden="true">·</span>
+          <span>Telaah Dosen & Guru Pamong</span>
         </div>
       </div>
 
@@ -96,7 +86,7 @@ export const ArtefakSection: React.FC = () => {
           <button
             key={cat}
             onClick={() => setFilterType(cat)}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`px-3.5 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap shrink-0 cursor-pointer ${
               filterType === cat
                 ? 'bg-white text-stone-900 shadow-2xs font-semibold'
                 : 'text-stone-600 hover:text-stone-900'
@@ -112,14 +102,14 @@ export const ArtefakSection: React.FC = () => {
         {filteredArtifacts.map((artifact) => (
           <div
             key={artifact.id}
-            className="bg-white border border-stone-200 rounded-xl p-6 flex flex-col justify-between hover:border-stone-300 transition-colors space-y-4"
+            className="bg-white border border-stone-200 hover:border-stone-350 rounded-xl p-6 flex flex-col justify-between transition-all duration-200 shadow-2xs space-y-4"
           >
             <div className="space-y-3">
-              <div className="flex items-center justify-between gap-2 text-xs text-stone-500">
-                <span className="font-medium text-stone-800">
+              <div className="flex items-center justify-between gap-2 text-xs">
+                <span className="font-semibold text-stone-900 bg-stone-100 px-2.5 py-0.5 rounded">
                   {artifact.type}
                 </span>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 text-stone-500 font-mono text-[11px]">
                   <span>{artifact.gradeLevel}</span>
                   <span aria-hidden="true">·</span>
                   <span>{artifact.pages} Hlm</span>
@@ -136,13 +126,15 @@ export const ArtefakSection: React.FC = () => {
 
               {/* Competencies */}
               <div className="pt-2">
-                <p className="text-[11px] font-medium text-stone-500 uppercase tracking-wide mb-1.5">
+                <p className="text-[11px] font-semibold text-stone-500 uppercase tracking-wide mb-1.5 font-mono">
                   Capaian Pembelajaran:
                 </p>
                 <ul className="space-y-1.5 text-xs text-stone-600">
                   {artifact.competencies.map((comp, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <span className="text-stone-400 font-mono text-[11px] shrink-0">0{idx + 1}.</span>
+                      <span className="text-stone-800 font-bold shrink-0 mt-0.5 text-xs">
+                        ✓
+                      </span>
                       <span>{comp}</span>
                     </li>
                   ))}
@@ -150,22 +142,21 @@ export const ArtefakSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Action buttons */}
+            {/* Actions */}
             <div className="pt-4 border-t border-stone-100 flex items-center justify-between gap-3 text-xs">
               <button
                 onClick={() => setActiveArtifactModal(artifact)}
-                className="inline-flex items-center gap-1.5 text-stone-800 hover:text-stone-950 font-medium cursor-pointer"
+                className="px-3.5 py-2 bg-stone-50 text-stone-800 hover:bg-stone-100 font-medium rounded-lg transition-colors flex items-center gap-1.5 border border-stone-200 cursor-pointer"
               >
-                <Eye className="w-3.5 h-3.5 text-stone-500" />
-                <span>Pratinjau Dokumen</span>
+                <Eye className="w-3.5 h-3.5 text-stone-600" />
+                <span>Lihat Cuplikan</span>
               </button>
 
               <button
                 onClick={() => handleDownloadArtifact(artifact)}
-                className="inline-flex items-center gap-1 px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded font-medium transition-colors border border-stone-200/60 cursor-pointer"
-                title="Unduh ringkasan dokumen perangkat"
+                className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white font-medium rounded-lg shadow-2xs transition-colors flex items-center gap-1.5 cursor-pointer"
               >
-                <Download className="w-3.5 h-3.5 text-stone-600" />
+                <Download className="w-3.5 h-3.5" />
                 <span>Unduh ({artifact.fileSize})</span>
               </button>
             </div>
@@ -175,78 +166,58 @@ export const ArtefakSection: React.FC = () => {
 
       {/* Artifact Preview Modal */}
       {activeArtifactModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-stone-300 shadow-xl p-6 sm:p-8 space-y-6 relative">
-            <button
-              onClick={() => setActiveArtifactModal(null)}
-              className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-800 rounded-lg hover:bg-stone-100 transition-colors cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="space-y-2">
-              <div className="text-xs text-stone-500 font-mono">
-                {activeArtifactModal.type} · {activeArtifactModal.curriculum}
+        <div 
+          onClick={() => setActiveArtifactModal(null)}
+          className="fixed inset-0 z-50 bg-stone-950/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-150"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl border border-stone-300"
+          >
+            {/* Modal Header */}
+            <div className="p-6 border-b border-stone-200 flex items-start justify-between bg-stone-50">
+              <div className="space-y-1">
+                <span className="text-[11px] font-mono text-stone-600 bg-stone-200/80 px-2.5 py-0.5 rounded inline-block">
+                  {activeArtifactModal.type} · {activeArtifactModal.gradeLevel}
+                </span>
+                <h3 className="text-lg font-bold font-serif-title text-stone-900 leading-snug">
+                  {activeArtifactModal.title}
+                </h3>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold font-serif-title text-stone-900 leading-snug">
-                {activeArtifactModal.title}
-              </h3>
-              <div className="flex items-center gap-3 text-xs text-stone-500 pt-1">
-                <span>Sasaran: {activeArtifactModal.gradeLevel}</span>
-                <span aria-hidden="true">·</span>
-                <span>Jumlah: {activeArtifactModal.pages} Halaman</span>
-                <span aria-hidden="true">·</span>
-                <span>Ukuran: {activeArtifactModal.fileSize}</span>
-              </div>
-            </div>
-
-            <div className="space-y-4 text-xs sm:text-sm text-stone-700">
-              <div className="bg-stone-50 border border-stone-200 rounded-lg p-4 space-y-1.5">
-                <h4 className="font-semibold text-stone-900 text-xs uppercase tracking-wider">
-                  Cuplikan Skenario / Lembar Kerja:
-                </h4>
-                <p className="italic text-stone-600 leading-relaxed font-sans">
-                  "{activeArtifactModal.previewSnippet}"
-                </p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-stone-900 text-xs uppercase tracking-wider mb-2">
-                  Target Capaian Pembelajaran:
-                </h4>
-                <ul className="space-y-1.5">
-                  {activeArtifactModal.competencies.map((comp, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-stone-700">
-                      <Check className="w-3.5 h-3.5 text-stone-600 shrink-0 mt-0.5" />
-                      <span>{comp}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-stone-900 text-xs uppercase tracking-wider mb-1">
-                  Deskripsi Perancangan:
-                </h4>
-                <p className="text-stone-600 leading-relaxed">
-                  {activeArtifactModal.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-3">
               <button
                 onClick={() => setActiveArtifactModal(null)}
-                className="px-4 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100 rounded-lg transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-stone-200 text-stone-500 hover:text-stone-900 transition-colors cursor-pointer"
               >
-                Tutup
+                <X className="w-5 h-5" />
               </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-stone-700 leading-relaxed font-mono whitespace-pre-line bg-stone-50/50">
+              <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-2xs font-sans">
+                <strong className="block text-stone-900 text-sm font-serif-title mb-2">
+                  Cuplikan Naskah Modul / LKPD:
+                </strong>
+                <p className="whitespace-pre-line text-stone-700 leading-relaxed text-xs sm:text-sm font-sans">
+                  {activeArtifactModal.previewSnippet}
+                </p>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 border-t border-stone-200 flex items-center justify-between bg-white">
+              <span className="text-xs text-stone-500 font-mono">
+                Penyusun: Tantri Fadhillah, S.Pd.
+              </span>
               <button
-                onClick={() => handleDownloadArtifact(activeArtifactModal)}
-                className="px-4 py-2 text-xs font-semibold text-white bg-stone-900 hover:bg-stone-800 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                onClick={() => {
+                  handleDownloadArtifact(activeArtifactModal);
+                  setActiveArtifactModal(null);
+                }}
+                className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white font-medium rounded-lg text-xs flex items-center gap-2 cursor-pointer shadow-2xs"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Unduh Berkas Lengkap</span>
+                <span>Unduh Lengkap (.txt)</span>
               </button>
             </div>
           </div>

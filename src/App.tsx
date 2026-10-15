@@ -13,13 +13,11 @@ import { ArtefakSection } from './components/ArtefakSection';
 import { PenilaianSection } from './components/PenilaianSection';
 import { DokumentasiSection } from './components/DokumentasiSection';
 import { SeminarSection } from './components/SeminarSection';
-import { BlogSection } from './components/BlogSection';
 import { ContactModal } from './components/ContactModal';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<SectionId>('beranda');
   const [selectedSeminarTaskId, setSelectedSeminarTaskId] = useState<string | undefined>(undefined);
-  const [selectedBlogPostId, setSelectedBlogPostId] = useState<string | undefined>(undefined);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // Scroll to top when section changes
@@ -34,16 +32,10 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSelectBlogPost = (postId: string) => {
-    setSelectedBlogPostId(postId);
-    setActiveSection('blog');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-stone-200 selection:text-stone-900">
+    <div className="min-h-screen bg-[#FBF9F5] text-stone-900 flex flex-col font-sans selection:bg-stone-200 selection:text-stone-900">
       
-      {/* Top 3-Zone Navigation Bar */}
+      {/* Top Navigation Bar */}
       <Navbar
         activeSection={activeSection}
         onNavigate={handleNavigate}
@@ -56,7 +48,6 @@ export default function App() {
           <HomeSection
             onNavigate={handleNavigate}
             onSelectSeminarTask={handleSelectSeminarTask}
-            onSelectBlogPost={handleSelectBlogPost}
           />
         )}
 
@@ -73,10 +64,6 @@ export default function App() {
             selectedTaskId={selectedSeminarTaskId}
             onSelectTask={setSelectedSeminarTaskId}
           />
-        )}
-
-        {activeSection === 'blog' && (
-          <BlogSection initialPostId={selectedBlogPostId} />
         )}
       </main>
 
